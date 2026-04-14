@@ -262,7 +262,7 @@ a {
    5. HERO SECTION
    ========================================================================== */
 .hero-section {
-    padding: 6rem 0;
+    padding: 10rem 0;
     /* Utilizing a gradient background to create visual interest without image payloads */
     background: linear-gradient(135deg, var(--creamy-latte) 0%, var(--cappuccino-beige) 100%);
     text-align: center;
@@ -270,16 +270,15 @@ a {
 
 .hero-title {
     font-size: 4rem;
+    color: rgb(214, 169, 124);
     margin-bottom: 1rem;
 }
 
-.text-highlight {
-    color: var(--hazelnut-brown);
-}
+
 
 .hero-subtitle {
-    font-size: 1.2rem;
-    color: var(--mocha-brown);
+    font-size: 1.9rem;
+    color: var(--chai-spice);
     max-width: 600px;
     margin: 0 auto 2rem auto;
 }
@@ -334,7 +333,8 @@ a {
 .hero-overlay {
     width: 100%;
     /* Dark semi-transparent overlay */
-    background-color: rgba(0, 0, 0, 0); 
+    background-color: rgb(88, 57, 39, 0.5); 
+    
     
     /* Flexbox to center the content horizontally and vertically */
     display: flex;
@@ -361,11 +361,12 @@ a {
 }
 
 .text-highlight {
-    color: #f39c12; /* Example brand color (warm orange/gold) */
+    color: rgb(232, 217, 194); /* Example brand color (warm orange/gold) */
 }
 
 .hero-subtitle {
     font-size: clamp(1rem, 2vw, 1.25rem);
+    color: white;
     margin-bottom: 2rem;
     line-height: 1.5;
     opacity: 0.9;
@@ -388,9 +389,9 @@ a {
 }
 
 .btn-primary {
-    background-color: #5d4218;
+    background-color: #ffffff00;
     color: #fff;
-    border: 2px solid #5d451a;
+    border: 2px solid #fff;
 }
 
 .btn-primary:hover {
