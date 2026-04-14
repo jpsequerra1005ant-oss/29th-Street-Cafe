@@ -317,7 +317,7 @@ a {
 /* --- Hero Section & Image Sizing --- */
 .hero-section {
     /* Replace this URL with your actual image */
-    background-image: url('img/background.jpg'); 
+    background-image: url('../images/background.jpeg'); 
     
     /* These three properties ensure the image shrinks and flexes perfectly */
     background-size: cover; 
@@ -334,7 +334,7 @@ a {
 .hero-overlay {
     width: 100%;
     /* Dark semi-transparent overlay */
-    background-color: rgba(0, 0, 0, 0.6); 
+    background-color: rgba(0, 0, 0, 0); 
     
     /* Flexbox to center the content horizontally and vertically */
     display: flex;
