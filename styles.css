@@ -1,0 +1,642 @@
+:root {
+    /* Primary Color Palette */
+    --espresso-brown: #4b2c20;      /* Deep primary text and emphasis */
+    --creamy-latte: #f9f1e4;        /* Primary background canvas */
+    --cappuccino-beige: #bfa78a;    /* Secondary background and structural borders */
+    --mocha-brown: #6e4f3e;         /* Secondary text and interactive hover states */
+    --hazelnut-brown: #8b5b3f;      /* Accents and active states */
+    --chai-spice: #d8a078;          /* High-visibility Call-To-Action highlights */
+    
+    /* Typography System */
+    --font-primary: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    
+    /* Structural Constants */
+    --transition-standard: all 0.3s ease-in-out;
+    --shadow-soft: 0 4px 6px rgba(75, 44, 32, 0.1);
+    --shadow-hover: 0 10px 15px rgba(75, 44, 32, 0.15);
+}
+
+/* ==========================================================================
+   2. GLOBAL RESET & TYPOGRAPHY BASE (CSS Box Model Compliance)
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Crucial for proper CSS Box Model sizing */
+}
+
+html {
+    /* Enables smooth scrolling to anchor links across the SPA */
+    scroll-behavior: smooth; 
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--creamy-latte);
+    color: var(--espresso-brown);
+    line-height: 1.6; /* Optimizes readability of body copy */
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Constrains content width on large monitors while providing mobile margins */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Typographic Hierarchy Styling */
+h1, h2, h3, h4 {
+    color: var(--espresso-brown);
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition-standard);
+}
+
+/* Responsive Image Handling */
+.responsive-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}
+
+/* ==========================================================================
+   3. UTILITY CLASSES & BUTTON COMPONENTS
+   ========================================================================== */
+.btn {
+    display: inline-block;
+    padding: 10px 24px;
+    border-radius: 50px; /* Pill shape standard in app-centric UI */
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: var(--transition-standard);
+}
+
+.btn-primary {
+    background-color: var(--espresso-brown);
+    color: var(--creamy-latte);
+}
+
+.btn-primary:hover {
+    background-color: var(--mocha-brown);
+    transform: translateY(-2px); /* Optical illusion of button press */
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--espresso-brown);
+    border-color: var(--espresso-brown);
+}
+
+.btn-secondary:hover {
+    background-color: var(--cappuccino-beige);
+    color: var(--espresso-brown);
+    border-color: var(--cappuccino-beige);
+}
+
+.divider {
+    height: 4px;
+    width: 60px;
+    background-color: var(--chai-spice);
+    margin: 1rem auto 2rem auto;
+    border-radius: 2px;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+/* ==========================================================================
+   4. HEADER & JAVASCRIPT-FREE NAVIGATION
+   ========================================================================== */
+.site-header {
+    background-color: var(--creamy-latte);
+    box-shadow: var(--shadow-soft);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 1rem 0;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.brand-logo {
+    font-size: 1.8rem;
+    font-weight: 900;
+    letter-spacing: -1px;
+}
+
+.logo-accent {
+    color: var(--hazelnut-brown);
+    font-weight: 300;
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-link {
+    font-weight: 600;
+    color: var(--mocha-brown);
+}
+
+.nav-link:hover {
+    color: var(--hazelnut-brown);
+}
+
+.btn-nav {
+    background-color: var(--chai-spice);
+    color: var(--espresso-brown);
+    padding: 8px 20px;
+    border-radius: 20px;
+}
+
+.btn-nav:hover {
+    background-color: var(--espresso-brown);
+    color: var(--creamy-latte);
+}
+
+/* The core of the CSS Hack: Hide the functional checkbox entirely */
+.nav-checkbox {
+    display: none;
+}
+
+/* Mobile Hamburger Icon structural styling (Hidden on Desktop) */
+.nav-toggle-label {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.hamburger-line {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: var(--espresso-brown);
+    border-radius: 3px;
+    transition: var(--transition-standard);
+}
+
+/* Responsive Navigation Breakpoint (Mobile Execution) */
+@media screen and (max-width: 768px) {
+   .nav-toggle-label {
+        display: flex; /* Reveal the hamburger icon on mobile */
+    }
+
+   .main-navigation {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--creamy-latte);
+        box-shadow: 0 10px 10px rgba(0,0,0,0.05);
+        
+        /* CSS-Only state hiding using max-height for transitional animation */
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-out;
+    }
+
+   .nav-list {
+        flex-direction: column;
+        padding: 0;
+        gap: 0;
+    }
+
+   .nav-list li {
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid var(--cappuccino-beige);
+    }
+
+   .nav-link {
+        display: block;
+        padding: 1.5rem;
+    }
+
+   .btn-nav {
+        background-color: transparent;
+        color: var(--chai-spice);
+        border-radius: 0;
+    }
+
+    /* THE CSS SIBLING LOGIC: When checkbox is checked, expand the menu height */
+   .nav-checkbox:checked ~.main-navigation {
+        max-height: 500px; /* Provides enough vertical space for content to reveal */
+    }
+
+    /* Transform Hamburger into an 'X' via CSS Rotations based on checkbox state */
+   .nav-checkbox:checked ~.nav-toggle-label.hamburger-line:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+    }
+   .nav-checkbox:checked ~.nav-toggle-label.hamburger-line:nth-child(2) {
+        opacity: 0; /* Fade out middle bar */
+    }
+   .nav-checkbox:checked ~.nav-toggle-label.hamburger-line:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+    }
+}
+
+/* ==========================================================================
+   5. HERO SECTION
+   ========================================================================== */
+.hero-section {
+    padding: 6rem 0;
+    /* Utilizing a gradient background to create visual interest without image payloads */
+    background: linear-gradient(135deg, var(--creamy-latte) 0%, var(--cappuccino-beige) 100%);
+    text-align: center;
+}
+
+.hero-title {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.text-highlight {
+    color: var(--hazelnut-brown);
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    color: var(--mocha-brown);
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+.hero-container {
+  position: relative;
+  width: 100%;
+  height: 500px; /* Set your desired hero height */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Keeps image proportions while covering the area */
+  z-index: -1;       /* Places image behind the content */
+}
+
+.hero-content {
+  text-align: center;
+  z-index: 1;        /* Ensures text stays on top */
+}
+/* --- Hero Section & Image Sizing --- */
+.hero-section {
+    /* Replace this URL with your actual image */
+    background-image: url('img/background.jpg'); 
+    
+    /* These three properties ensure the image shrinks and flexes perfectly */
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    /* Sets a minimum height so it always looks like a hero section */
+    min-height: 100vh; /* 100% of the viewport height */
+    position: relative;
+    display: flex;
+}
+
+/* --- The Overlay (Darkens image so text is readable) --- */
+.hero-overlay {
+    width: 100%;
+    /* Dark semi-transparent overlay */
+    background-color: rgba(0, 0, 0, 0.6); 
+    
+    /* Flexbox to center the content horizontally and vertically */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem; 
+}
+
+/* --- Content Container --- */
+.hero-content {
+    text-align: center;
+    color: #ffffff; /* White text for contrast */
+    max-width: 800px; /* Prevents text from stretching too wide on huge screens */
+    width: 100%;
+}
+
+/* --- Responsive Typography --- */
+.hero-title {
+    /* clamp(MIN, VAL, MAX) makes font fluidly resize between mobile and desktop */
+    font-size: clamp(2.5rem, 5vw, 4.5rem); 
+    margin-bottom: 1rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.text-highlight {
+    color: #f39c12; /* Example brand color (warm orange/gold) */
+}
+
+.hero-subtitle {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    margin-bottom: 2rem;
+    line-height: 1.5;
+    opacity: 0.9;
+}
+
+/* --- Buttons & Flex Layout --- */
+.hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem; /* Space between buttons */
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #5d4218;
+    color: #fff;
+    border: 2px solid #5d451a;
+}
+
+.btn-primary:hover {
+    background-color: #5b4015ea;
+    border-color: #5d4216;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+}
+
+.btn-secondary:hover {
+    background-color: #fff;
+    color: #333;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 480px) {
+    .hero-actions {
+        /* Stacks the buttons vertically on very small mobile screens */
+        flex-direction: column; 
+        width: 100%;
+    }
+    
+    .btn {
+        width: 100%; /* Makes buttons full-width on mobile */
+    }
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+/* ==========================================================================
+   6. OUR STORY SECTION (Flexbox Layout)
+   ========================================================================== */
+.story-section {
+    padding: 5rem 0;
+    background-color: #ffffff; /* Crisp white to break the beige monotony */
+}
+
+.story-grid {
+    display: flex;
+    gap: 4rem;
+    align-items: center;
+}
+
+.story-text {
+    flex: 1;
+}
+
+.story-text p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.story-visual {
+    flex: 1;
+}
+
+/* Fallback styling if images are missing */
+.placeholder-img-block {
+    background-color: var(--cappuccino-beige);
+    height: 300px;
+    width: 100%;
+    display: block;
+}
+
+@media screen and (max-width: 768px) {
+   .story-grid {
+        flex-direction: column-reverse; /* Stacks text below image on mobile */
+    }
+}
+
+/* ==========================================================================
+   7. MENU SECTION (CSS Grid Layout)
+   ========================================================================== */
+.menu-section {
+    padding: 5rem 0;
+    background-color: var(--creamy-latte);
+}
+
+.product-grid {
+    display: grid;
+    /* Mathematical responsive grid: Creates columns no smaller than 300px, 
+       expanding to fill available fractional space (1fr) */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.product-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition-standard);
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-5px); /* Interactive lift effect */
+}
+
+.product-image {
+    height: 200px;
+    width: 100%;
+    object-fit: cover; /* Ensures aspect ratio is maintained without distortion */
+    background-color: var(--cappuccino-beige); /* Fallback background */
+}
+
+.product-info {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.product-category {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--hazelnut-brown);
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.product-name {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.product-desc {
+    font-size: 0.95rem;
+    color: var(--mocha-brown);
+    margin-bottom: 1.5rem;
+    flex-grow: 1; /* Pushes meta data to the bottom of the card uniformly */
+}
+
+.product-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--creamy-latte);
+    padding-top: 1rem;
+}
+
+.product-price {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--espresso-brown);
+}
+
+.product-cal {
+    font-size: 0.85rem;
+    color: var(--mocha-brown);
+}
+
+/* ==========================================================================
+   8. APP PROMOTION SECTION
+   ========================================================================== */
+.app-section {
+    padding: 6rem 0;
+    background-color: var(--espresso-brown);
+    color: var(--creamy-latte);
+    text-align: center;
+}
+
+.app-content h2 {
+    color: var(--chai-spice);
+    font-size: 2.5rem;
+}
+
+.app-content p {
+    max-width: 600px;
+    margin: 1.5rem auto 2.5rem auto;
+    font-size: 1.1rem;
+    color: var(--cappuccino-beige);
+}
+
+.btn-large {
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    background-color: var(--chai-spice);
+    color: var(--espresso-brown);
+}
+
+.btn-large:hover {
+    background-color: var(--chai-spice);
+}
+
+/* ==========================================================================
+   9. FOOTER SECTION
+   ========================================================================== */
+.site-footer {
+    background-color: #351F16; /* Subdued, darker shade of Espresso for grounding */
+    color: var(--cappuccino-beige);
+    padding: 4rem 0 1rem 0;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.footer-brand h3 {
+    color: var(--creamy-latte);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.logo-accent-footer {
+    color: var(--chai-spice);
+}
+
+.footer-links h4 {
+    color: var(--chai-spice);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.footer-links ul {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+    color: var(--white);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(191, 167, 138, 0.2); /* Cappuccino beige at 20% opacity */
+    font-size: 0.89rem;
+}
+
+@media screen and (max-width: 768px) {
+   .footer-grid {
+        grid-template-columns: 1fr; /* Stack footer columns on mobile */
+        text-align: center;
+    }
+}
