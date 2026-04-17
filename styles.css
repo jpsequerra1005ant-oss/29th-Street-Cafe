@@ -1,16 +1,14 @@
 :root {
-    /* Primary Color Palette */
-    --espresso-brown: #4b2c20;      /* Deep primary text and emphasis */
-    --creamy-latte: #f9f1e4;        /* Primary background canvas */
-    --cappuccino-beige: #bfa78a;    /* Secondary background and structural borders */
-    --mocha-brown: #6e4f3e;         /* Secondary text and interactive hover states */
-    --hazelnut-brown: #8b5b3f;      /* Accents and active states */
-    --chai-spice: #d8a078;          /* High-visibility Call-To-Action highlights */
     
-    /* Typography System */
+    --espresso-brown: #4b2c20;     
+    --creamy-latte: #f9f1e4;       
+    --cappuccino-beige: #bfa78a;   
+    --mocha-brown: #6e4f3e;         
+    --hazelnut-brown: #8b5b3f;      
+    --chai-spice: #d8a078;         
+    
     --font-primary: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     
-    /* Structural Constants */
     --transition-standard: all 0.3s ease-in-out;
     --shadow-soft: 0 4px 6px rgba(75, 44, 32, 0.1);
     --shadow-hover: 0 10px 15px rgba(75, 44, 32, 0.15);
