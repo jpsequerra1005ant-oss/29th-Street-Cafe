@@ -6,6 +6,7 @@
     --mocha-brown: #6e4f3e;         
     --hazelnut-brown: #8b5b3f;      
     --chai-spice: #d8a078;         
+    --white: #ffffff;
     
     --font-primary: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     
@@ -614,6 +615,18 @@ a {
     margin-bottom: 0.5rem;
     font-size: 0.95rem;
     color: var(--white);
+}
+
+.footer-links a {
+    color: var(--chai-spice);
+    cursor: pointer;
+    text-decoration: underline;
+    transition: var(--transition-standard);
+}
+
+.footer-links a:hover {
+    color: var(--creamy-latte);
+    text-decoration: none;
 }
 
 .footer-bottom {
