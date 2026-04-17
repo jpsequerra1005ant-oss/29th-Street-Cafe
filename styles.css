@@ -271,7 +271,7 @@ a {
     font-size: 55px;
     font-weight: 800;
     text-align: center;
-    color: rgb(214, 169, 124);
+    color: #b79870;
     text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7);
     margin-bottom: 20px;
     display: block;
@@ -284,12 +284,7 @@ a {
     }
 }
 
-.hero-subtitle {
-    font-size: 1.9rem;
-    color: var(--chai-spice);
-    max-width: 600px;
-    margin: 0 auto 2rem auto;
-}
+
 
 .hero-actions {
     display: flex;
@@ -341,7 +336,7 @@ a {
 .hero-overlay {
     width: 100%;
     /* Dark semi-transparent overlay */
-    background-color: rgb(88, 57, 39, 0.5); 
+    background-color: rgba(88, 57, 39, 0); 
     
     
     /* Flexbox to center the content horizontally and vertically */
@@ -369,15 +364,17 @@ a {
 }
 
 .text-highlight {
-    color: rgb(232, 217, 194); /* Example brand color (warm orange/gold) */
+    color:#e9d8ba; /* Example brand color (warm orange/gold) */
 }
 
 .hero-subtitle {
-    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-family: 'Arial Black', sans-serif;
+    font-size: 27px;
     color: white;
     margin-bottom: 2rem;
     line-height: 1.5;
-    opacity: 0.9;
+    opacity: 1;
+    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.9);
 }
 
 /* --- Buttons & Flex Layout --- */
