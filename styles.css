@@ -14,14 +14,11 @@
     --shadow-soft: 0 4px 6px rgba(75, 44, 32, 0.1);
     --shadow-hover: 0 10px 15px rgba(75, 44, 32, 0.15);
 }
-
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box; 
 }
-
 html {
     
     scroll-behavior: smooth; 
@@ -312,7 +309,7 @@ a {
 
 .hero-section {
     
-    background-image: url('../images/background.jpeg'); 
+    background-image: url('/images/background.jpeg'); 
     
     
     background-size: cover; 
