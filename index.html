@@ -1,15 +1,11 @@
 <!DOCTYPE html>  
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>29th Street Cafe</title>
-</head>
-
-<body>
-<link rel="stylesheet" href="styles.css">
-<script src="script.js" defer></script>
-    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>29th Street Cafe</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
     <meta name="description" content="29th Street Cafe offers a cozy local spot to complete your day with your favorite coffee or tea, featuring a variety of coffee, milk tea, frappes, and more!">
 </head>
 <body>
@@ -18,7 +14,7 @@
         <div class="container header-container">
             
             <div class="logo-container">
-                <a href="#hero" class="brand-logo">29th<span class="logo-accent">Street Cafe</span></a>
+                <a href="index.html#hero" class="brand-logo">29th<span class="logo-accent">Street Cafe</span></a>
             </div>
 
             <input type="checkbox" id="mobile-nav-toggle" class="nav-checkbox" aria-hidden="true">
@@ -30,9 +26,10 @@
 
             <nav class="main-navigation">
                 <ul class="nav-list">
-                    <li><a href="#hero" class="nav-link">Home</a></li>
-                    <li><a href="#about" class="nav-link">About Us</a></li>
-                    <li><a href="#menu" class="nav-link btn-nav">Order Now</a></li>
+                    <li><a href="index.html#hero" class="nav-link">Home</a></li>
+                    <li><a href="index.html#about" class="nav-link">About Us</a></li>
+                    <li><a href="index.html#menu" class="nav-link">Menu</a></li>
+                    <li><a href="form.html" class="nav-link btn-nav">Order Now</a></li>
                     <li><a href="#app" class="nav-link btn-nav">Contact Us</a></li>
                 </ul>
             </nav>
@@ -41,19 +38,19 @@
 
     <main>
         <section id="hero" class="hero-section">
-    <div class="hero-overlay">
-        <div class="container hero-content">
-            <h1 class="hero-title"style="font-size: 100px;">29th <span class="text-highlight">Street Cafe</span></h1>
-           
-            <p class="hero-subtitle">Complete your day with a cup of your <br>favourite coffee and/or tea drink.</p>
-            <hr color="White"; style="width: 405px; margin: auto; height: 3.5px;"><br>
-            <div class="hero-actions">
-                <a href="#menu" class="btn btn-primary">View Menu</a>
-                <a href="#menu" class="btn btn-secondary">Order now</a>
+            <div class="hero-overlay">
+                <div class="container hero-content">
+                    <h1 class="hero-title" style="font-size: 100px;">29th <span class="text-highlight">Street Cafe</span></h1>
+                    
+                    <p class="hero-subtitle">Complete your day with a cup of your <br>favourite coffee and/or tea drink.</p>
+                    <hr color="White" style="width: 405px; margin: auto; height: 3.5px;"><br>
+                    <div class="hero-actions">
+                        <a href="index.html#menu" class="btn btn-primary">View Menu</a>
+                        <a href="form.html" class="btn btn-secondary">Order now</a>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
 
         <section id="about" class="story-section">
             <div class="container">
@@ -122,7 +119,7 @@
                             <span class="product-category">Americano</span>
                             <h3 class="product-name">Americano Series</h3>
                             <p class="product-desc">
-                        Original<br>
+                                Original<br>
                                 Caramel Macchiato<br>
                                 Hazelnut Brew<br>
                                 Vanilla Blanca<br>
@@ -207,9 +204,9 @@
                 </div>
             </div>
         </section>
-
         
     </main>
+
     <footer id="app" class="site-footer">
         <div class="container footer-grid">
             <div class="footer-brand">
@@ -217,18 +214,25 @@
                 <p>Your everyday coffee, made essential.</p>
                 <p>Contact Us: 0915-6088-305</p>
             </div>
-            <div class="footer-links">
+           <div class="footer-links">
                 <h4>Address</h4>
                 <ul>
                     <li>17-A.F Paz Street, Barangay Sta. Elena, Marikina City Philippines, 1800</li>
                 </ul>
+                
+                <details style="margin-top: 15px; cursor: pointer;">
+                    <summary style="color: var(--chai-spice); font-size: 0.95rem; text-decoration: underline; margin-bottom: 10px; outline: none;">
+                        View Location on Map
+                    </summary>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247050.96467806457!2d120.94661945484529!3d14.646214305176816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b9c610e8864b%3A0x1a244e8b13461ee4!2s29th%20Street%20Cafe%20by%20cof%2Ftea!5e0!3m2!1sen!2sph!4v1778140295258!5m2!1sen!2sph" width="100%" height="200" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </details>
             </div>
              <div class="footer-links">
                  <h4>Social Media</h4>
                       <ul>
                          <li><a href="https://www.facebook.com/share/1GhwQuFxMb/" target="_blank">Facebook: 29th Street Cafe</a></li>
                          <li><a href="https://www.instagram.com/29thstreet_cafe?igsh=YnEwdTN6cTJhbXZv" target="_blank">Instagram: 29th Street Cafe</a></li>
-                         <li><a href="mailto:29thstreetcafe.coftea@gmail.com">Email: 29thstreetcafe.coftea@gmail.com</a></li>
+                         <li><a href="mailto:29thstreetcafe.coftea@gmail.com" title="Send an email">Email: 29thstreetcafe.coftea@gmail.com</a></li>
                       </ul>
              </div>
             </div>
