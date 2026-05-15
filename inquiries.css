@@ -1,0 +1,176 @@
+/* Styling specific to the inquiries page matching the picture's layout */
+.inquiry-wrapper {
+    max-width: 850px;
+    margin: 60px auto;
+    padding: 40px;
+    background-color: var(--white);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: var(--shadow-soft);
+    border-radius: 8px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Header Area from Picture */
+.inquiry-top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--border, #E5DED5);
+    padding-bottom: 30px;
+    margin-bottom: 40px;
+}
+
+.inquiry-logo-box {
+    border: 1px dashed #ccc;
+    padding: 15px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inquiry-company-info {
+    text-align: right;
+    font-size: 0.95rem;
+    color: var(--mocha-brown);
+    line-height: 1.5;
+}
+
+.inquiry-company-info strong {
+    color: var(--espresso-brown);
+    font-size: 1.1rem;
+}
+
+/* Titles */
+.inquiry-title-section {
+    margin-bottom: 40px;
+}
+
+.inquiry-title-section h1 {
+    font-size: 2.2rem;
+    color: var(--espresso-brown);
+    margin-bottom: 5px;
+}
+
+.inquiry-title-section p {
+    color: #5c7080;
+    font-size: 1.1rem;
+}
+
+/* Form Layout */
+.inquiry-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+    margin-bottom: -20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.inquiry-form label {
+    font-weight: 600;
+    color: var(--espresso-brown);
+    margin-bottom: 10px;
+    font-size: 1.05rem;
+}
+
+.inquiry-form input, 
+.inquiry-form textarea {
+    padding: 12px 15px;
+    border: 1px solid #c2c9d1;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--text-main, #333);
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.inquiry-form input:focus, 
+.inquiry-form textarea:focus {
+    border-color: var(--chai-spice);
+    box-shadow: 0 0 0 2px rgba(216, 160, 120, 0.2);
+}
+
+.inquiry-form textarea {
+    min-height: 180px;
+    resize: vertical;
+    margin-top: 5px;
+}
+
+.inquiry-form input::placeholder {
+    color: #aeb6bf;
+}
+
+.sub-label {
+    font-size: 0.85rem;
+    color: #7a8b9a;
+    margin-top: 6px;
+}
+
+/* Submit Button */
+.form-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.submit-btn {
+    background-color: var(--espresso-brown);
+    color: #fff;
+    border: none;
+    padding: 14px 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: var(--transition-standard);
+}
+
+.submit-btn:hover {
+    background-color: var(--chai-spice);
+    color: var(--espresso-brown);
+}
+
+.success-notice {
+    display: none;
+    text-align: center;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .inquiry-top-header {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    .inquiry-company-info {
+        text-align: center;
+    }
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    .full-width {
+        margin-bottom: 0;
+    }
+}

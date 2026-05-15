@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>29th Street Cafe | Inquiries</title>
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="inquiries.css">
+    <script src="inquiries.js" defer></script>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container header-container">
+            <div class="logo-container">
+                <a href="index.html#hero" class="brand-logo">
+                    <img src="images/logo ulit.png" alt="29th Street Cafe Logo" class="logo-img">
+                </a>
+            </div>
+
+            <input type="checkbox" id="mobile-nav-toggle" class="nav-checkbox" aria-hidden="true">
+            <label for="mobile-nav-toggle" class="nav-toggle-label" aria-label="Toggle navigation menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </label>
+
+            <nav class="main-navigation">
+                <ul class="nav-list">
+                    <li><a href="index.html#about" class="nav-link">About Us</a></li>
+                    <li><a href="index.html#menu" class="nav-link">Menu</a></li>
+                    <li class="push-right"><a href="form.html" class="nav-link btn-nav">Order Now</a></li>
+                    <li><a href="#app" class="nav-link btn-nav-outline">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="inquiry-wrapper">
+        <div class="inquiry-top-header">
+            <div class="inquiry-logo-box">
+                <a href="index.html" class="brand-logo" style="font-size: 1.5rem;">29th<span style="color: var(--chai-spice);">Street Cafe</span></a>
+            </div>
+            <div class="inquiry-company-info">
+                <strong>29TH STREET CAFE</strong><br>
+                17-A.F Paz Street, Brgy. Sta. Elena<br>
+                Marikina City, Philippines, 1800<br>
+                29thstreetcafe.coftea@gmail.com<br>
+                0915-6088-305
+            </div>
+        </div>
+
+        <div class="inquiry-title-section">
+            <h1>Inquiry Form</h1>
+            <p>We will get in touch with you shortly</p>
+        </div>
+
+        <form id="inquiryForm" class="inquiry-form">
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label>Your Name</label>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="inqFirstName" name="firstName" required>
+                    <span class="sub-label">First Name</span>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="inqLastName" name="lastName" required>
+                    <span class="sub-label">Last Name</span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="inqPhone">Phone Number</label>
+                    <input type="tel" id="inqPhone" name="phone" placeholder="(000) 000-0000" maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                </div>
+                <div class="form-group">
+                    <label for="inqEmail">Your E-mail Address</label>
+                    <input type="email" id="inqEmail" name="email" placeholder="ex: myname@example.com" required>
+                    <span class="sub-label">example@example.com</span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label for="inqMessage">Leave Your Message</label>
+                    <textarea id="inqMessage" name="message" required></textarea>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="submit-btn">Submit</button>
+            </div>
+            
+            <div id="inquirySuccess" class="success-notice"></div>
+        </form>
+
+    </div>
+
+    <footer id="app" class="site-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <h3>29th<span class="logo-accent-footer">Street Cafe</span></h3>
+                <p>Your everyday coffee, made essential.</p>
+                <p>Contact Us: 0915-6088-305</p>
+                <p style="margin-top: 15px; color: var(--chai-spice); font-size: 0.95rem;">
+                    <strong>Business Hours:</strong><br>
+                    10:00 AM to 7:00 PM<br>
+                    Mondays to Fridays
+                </p>
+            </div>
+           <div class="footer-links">
+                <h4>Address</h4>
+                <ul>
+                    <li>17-A.F Paz Street, Barangay Sta. Elena, Marikina City Philippines, 1800</li>
+                </ul>
+                
+                <details style="margin-top: 15px; cursor: pointer;">
+                    <summary style="color: var(--chai-spice); font-size: 0.95rem; text-decoration: underline; margin-bottom: 10px; outline: none;">
+                        View Location on Map
+                    </summary>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247050.96467806457!2d120.94661945484529!3d14.646214305176816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b9c610e8864b%3A0x1a244e8b13461ee4!2s29th%20Street%20Cafe%20by%20cof%2Ftea!5e0!3m2!1sen!2sph!4v1778140295258!5m2!1sen!2sph" width="100%" height="200" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </details>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links & Socials</h4>
+                <ul>
+                    <li><a href="inquiries.html" style="text-decoration: underline;">Send an Inquiry</a></li>
+                    <li style="margin-top: 10px;"><a href="https://www.facebook.com/share/1GhwQuFxMb/" target="_blank">Facebook: 29th Street Cafe</a></li>
+                    <li><a href="https://www.instagram.com/29thstreet_cafe" target="_blank">Instagram: 29th Street Cafe</a></li>
+                    <li><a href="mailto:29thstreetcafe.coftea@gmail.com" title="Send an email">Email: 29thstreetcafe.coftea@gmail.com</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 29thStreetCafe. All Right Reserved.</p>
+        </div>
+    </footer>
+
+    <a href="#" id="scrollToTopBtn" class="scroll-to-top" aria-label="Scroll to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 19V5M5 12l7-7 7 7"/>
+        </svg>
+    </a>
+
+</body>
+</html>
