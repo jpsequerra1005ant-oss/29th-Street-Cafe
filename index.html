@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>29th Street Cafe</title>
+    
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
     <meta name="description" content="29th Street Cafe offers a cozy local spot to complete your day with your favorite coffee or tea, featuring a variety of coffee, milk tea, frappes, and more!">
@@ -30,7 +31,7 @@
                     <li><a href="index.html#about" class="nav-link">About Us</a></li>
                     <li><a href="index.html#menu" class="nav-link">Menu</a></li>
                     <li><a href="form.html" class="nav-link btn-nav">Order Now</a></li>
-                    <li><a href="#app" class="nav-link btn-nav">Contact Us</a></li>
+                    <li><a href="#app" class="nav-link btn-nav-outline">Contact Us</a></li>
                 </ul>
             </nav>
         </div>
@@ -40,13 +41,13 @@
         <section id="hero" class="hero-section">
             <div class="hero-overlay">
                 <div class="container hero-content">
-                    <h1 class="hero-title" style="font-size: 100px;">29th <span class="text-highlight">Street Cafe</span></h1>
-                    
+                    <h1 class="hero-title">29th <span class="text-highlight">Street Cafe</span></h1>
                     <p class="hero-subtitle">Complete your day with a cup of your <br>favourite coffee and/or tea drink.</p>
-                    <hr color="White" style="width: 405px; margin: auto; height: 3.5px;"><br>
+                    <div class="hero-divider"></div>
                     <div class="hero-actions">
-                        <a href="index.html#menu" class="btn btn-primary">View Menu</a>
-                        <a href="form.html" class="btn btn-secondary">Order now</a>
+                        <!-- Swapped the classes here so View Menu is outlined and Order Now is solid -->
+                        <a href="index.html#menu" class="btn btn-secondary">View Menu</a>
+                        <a href="form.html" class="btn btn-primary">Order Now</a>
                     </div>
                 </div>
             </div>
@@ -55,16 +56,16 @@
         <section id="about" class="story-section">
             <div class="container">
                 <div class="section-header">
-                    <h2>About Us</h2>
+                    <h2>Our Story</h2>
                     <div class="divider"></div>
                 </div>
                 <div class="story-grid">
                     <div class="story-text">
-                        <p>Located in Marikina City, our business is dedicated to serving students from elementary to college, especially with our convenient location near schools. We are committed to providing quality products and excellent customer service, creating a welcoming space where students can easily access what they need. Our mission is to grow as a community-centered business that builds trust and customer loyalty through consistent service and reliable offerings.</p>
-                        <p>To better serve our customers, we have developed a website that provides a centralized menu, real-time product availability, and reduces the need for repetitive inquiries on Messenger. This also helps us connect with the younger generation who are active online, allowing us to expand our reach and promote our business more effectively. Despite challenges such as strong competition from nearby coffee shops and well-known stores, as well as occasional slow sales, we remain focused on improving our services and strengthening our presence in the community.</p>
+                        <p>Located in Marikina City, our business is dedicated to serving students from elementary to college, especially with our convenient location near schools. We are committed to providing quality products and excellent customer service, creating a welcoming space where students can easily access what they need.</p>
+                        <p>Our mission is to grow as a community-centered business that builds trust and customer loyalty through consistent service and reliable offerings. Despite challenges such as strong competition from nearby coffee shops, we remain focused on improving our services and strengthening our presence in the community.</p>
                     </div>
                     <div class="story-visual">
-                        <img src="images/aboutUs.jpeg" alt="Freshly roasted brown coffee beans representing the ZUS Coffee quality promise" class="responsive-image placeholder-img-block">
+                        <img src="images/aboutUs.jpeg" alt="29th Street Cafe Story" class="responsive-image placeholder-img-block">
                     </div>
                 </div>
             </div>
@@ -81,11 +82,13 @@
                 <div class="product-grid">
                     
                     <article class="product-card">
-                        <img src="images\strawberry-berry-tea.jpeg" alt="Strawberry Black Tea" class="product-image">
+                        <div class="image-wrapper">
+                            <img src="images\strawberry-berry-tea.jpeg" alt="Strawberry Black Tea" class="product-image">
+                        </div>
                         <div class="product-info">
                             <span class="product-category">Signature</span>
                             <h3 class="product-name">Strawberry Black Tea</h3>
-                            <p class="product-desc">Tea based strawberry juice</p>
+                            <p class="product-desc">Refreshing tea-based strawberry juice</p>
                             <div class="product-meta">
                                 <span class="product-price">₱59/69</span>
                             </div>
@@ -93,19 +96,14 @@
                     </article>
 
                     <article class="product-card">
-                        <img src="images/latte.jpeg" alt="Latte" class="product-image">
+                        <div class="image-wrapper">
+                            <img src="images/latte.jpeg" alt="Latte" class="product-image">
+                        </div>
                         <div class="product-info">
-                            <span class="product-category">Latte</span>
+                            <span class="product-category">Classic</span>
                             <h3 class="product-name">Latte Series</h3>
                             <p class="product-desc">
-                                Caramel Macchiato<br>
-                                Hazelnut Brew<br>
-                                Vanilla Blanca<br>
-                                Salted Caramel<br>
-                                Chocolate<br>
-                                Pure Matcha<br>
-                                Strawberry Matcha<br>
-                                Caramel Matcha<br>
+                                Caramel Macchiato • Hazelnut Brew • Vanilla Blanca • Salted Caramel • Pure Matcha & More
                             </p>
                             <div class="product-meta">
                                 <span class="product-price">₱49/59</span>
@@ -114,17 +112,14 @@
                     </article>
 
                     <article class="product-card">
-                        <img src="images\americano.jpg" alt="Americano" class="product-image">
+                        <div class="image-wrapper">
+                            <img src="images\americano.jpg" alt="Americano" class="product-image">
+                        </div>
                         <div class="product-info">
-                            <span class="product-category">Americano</span>
+                            <span class="product-category">Strong</span>
                             <h3 class="product-name">Americano Series</h3>
                             <p class="product-desc">
-                                Original<br>
-                                Caramel Macchiato<br>
-                                Hazelnut Brew<br>
-                                Vanilla Blanca<br>
-                                White Cappuccino<br>
-                                Salted Caramel<br>
+                                Original • Caramel Macchiato • Hazelnut Brew • Vanilla Blanca • White Cappuccino
                             </p>
                             <div class="product-meta">
                                 <span class="product-price">₱49/59</span>
@@ -133,21 +128,14 @@
                     </article>
 
                     <article class="product-card">
-                        <img src="images/frappe.jpeg" alt="Frappe" class="product-image">
+                        <div class="image-wrapper">
+                            <img src="images/frappe.jpeg" alt="Frappe" class="product-image">
+                        </div>
                         <div class="product-info">
-                            <span class="product-category">Frappe</span>
+                            <span class="product-category">Ice Blended</span>
                             <h3 class="product-name">Frappe Series</h3>
                             <p class="product-desc">
-                                Chocolate<br>
-                                Java Chip<br>
-                                Cookies & Cream Caramel & Cream<br>
-                                Cheesecake<br>
-                                Vanilla Coffee<br>
-                                Mango Cheesecake<br>
-                                Purple Taro<br>
-                                Strawberry +₱10<br>
-                                Green Matcha +₱10<br>
-                                Dark Chocolate+₱10<br>
+                                Java Chip • Cookies & Cream • Vanilla Coffee • Mango Cheesecake • Purple Taro & More
                             </p>
                             <div class="product-meta">
                                 <span class="product-price">₱69/79</span>
@@ -156,23 +144,14 @@
                     </article>
 
                     <article class="product-card">
-                        <img src="images\milk-tea.jpg" alt="Milktea" class="product-image">
+                        <div class="image-wrapper">
+                            <img src="images\milk-tea.jpg" alt="Milktea" class="product-image">
+                        </div>
                         <div class="product-info">
-                            <span class="product-category">Milktea</span>
+                            <span class="product-category">Sweet</span>
                             <h3 class="product-name">Milktea Series</h3>
                             <p class="product-desc">
-                                Original<br>
-                                Wintermelon<br>
-                                Okinawa<br>
-                                Hokkaido<br>
-                                Cookies & Cream<br>
-                                Chocolate<br>
-                                Purple Taro<br>
-                                Brown Sugar<br>
-                                Mango Cheesecake<br>
-                                Strawberry<br>
-                                Green Matcha<br>
-                                Dark Chocolate<br>
+                                Wintermelon • Okinawa • Hokkaido • Brown Sugar • Green Matcha • Dark Chocolate
                             </p>
                             <div class="product-meta">
                                 <span class="product-price">₱49/59</span>
@@ -181,22 +160,17 @@
                     </article>
 
                     <article class="product-card">
-                        <img src="images\fruit-tea.jpg" alt="Fruit & Soda" class="product-image">
+                        <div class="image-wrapper">
+                            <img src="images\fruit-tea.jpg" alt="Fruit Soda" class="product-image">
+                        </div>
                         <div class="product-info">
-                            <span class="product-category">Fruit & Soda</span>
+                            <span class="product-category">Fruity</span>
                             <h3 class="product-name">Fruit & Soda Series</h3>
                             <p class="product-desc">
-                                (Soda ₱+10) <br>
-                                Kiwi<br>
-                                Blueberry<br>
-                                Green Apple<br>
-                                Lychee<br>
-                                Passion Fruit<br>
-                                Strawberry<br>
-                                Mango<br>
+                                Kiwi • Blueberry • Green Apple • Lychee • Passion Fruit • Strawberry • Mango
                             </p>
                             <div class="product-meta">
-                                <span class="product-price">₱49/59 </span>
+                                <span class="product-price">₱49/59</span>
                             </div>
                         </div>
                     </article>
@@ -231,7 +205,7 @@
                  <h4>Social Media</h4>
                       <ul>
                          <li><a href="https://www.facebook.com/share/1GhwQuFxMb/" target="_blank">Facebook: 29th Street Cafe</a></li>
-                         <li><a href="https://www.instagram.com/29thstreet_cafe?igsh=YnEwdTN6cTJhbXZv" target="_blank">Instagram: 29th Street Cafe</a></li>
+                         <li><a href="https://www.instagram.com/29thstreet_cafe" target="_blank">Instagram: 29th Street Cafe</a></li>
                          <li><a href="mailto:29thstreetcafe.coftea@gmail.com" title="Send an email">Email: 29thstreetcafe.coftea@gmail.com</a></li>
                       </ul>
              </div>
