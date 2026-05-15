@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>29th Street Cafe | Inquiries</title>
+    <title>29th Street Cafe | My Cart</title>
     
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="inquiries.css">
-    <script src="inquiries.js" defer></script>
+    <script src="cart.js" defer></script>
 </head>
 <body>
 
@@ -46,69 +45,39 @@
         </div>
     </header>
 
-    <div class="inquiry-wrapper">
-        <div class="inquiry-top-header">
-            <div class="inquiry-logo-box">
-                <a href="index.html" class="brand-logo" style="font-size: 2.2rem; text-decoration: none;">29th<span style="color: var(--chai-spice);">Street Cafe</span></a>
+    <main class="cart-page-main">
+        <div class="cart-wrapper">
+            <div class="cart-header">
+                <h1>My Cart List</h1>
+                <p>Review your selected drinks before checking out.</p>
             </div>
-            <div class="inquiry-company-info">
-                <strong>29TH STREET CAFE</strong><br>
-                17-A.F Paz Street, Brgy. Sta. Elena<br>
-                Marikina City, Philippines, 1800<br>
-                29thstreetcafe.coftea@gmail.com<br>
-                0915-6088-305
+
+            <div id="cartItemsContainer" class="cart-items-container">
+                </div>
+
+            <div class="promo-code-box">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--espresso-brown)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 10px;">
+                    <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                    <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                </svg>
+                Do You have any promo code?
             </div>
+
+            <div class="cart-summary">
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span id="cartSubtotal">₱0.00</span>
+                </div>
+                <div class="summary-divider"></div>
+                <div class="summary-row total-row">
+                    <span>Total</span>
+                    <span id="cartTotal">₱0.00</span>
+                </div>
+            </div>
+
+            <a href="form.html" class="btn-checkout">Check out</a>
         </div>
-
-        <div class="inquiry-title-section">
-            <h1>Inquiry Form</h1>
-            <p>We will get in touch with you shortly.</p>
-        </div>
-
-        <form id="inquiryForm" class="inquiry-form">
-            <div class="form-row">
-                <div class="form-group full-width">
-                    <label>Your Name</label>
-                </div>
-                <div class="form-group">
-                    <input type="text" id="inqFirstName" name="firstName" placeholder="First Name" pattern="[A-Za-z\s]+" title="Only letters and spaces are allowed" required>
-                    <span class="sub-label">First Name</span>
-                </div>
-                <div class="form-group">
-                    <input type="text" id="inqLastName" name="lastName" placeholder="Last Name" pattern="[A-Za-z\s]+" title="Only letters and spaces are allowed" required>
-                    <span class="sub-label">Last Name</span>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="inqPhone">Phone Number</label>
-                    <div class="phone-group">
-                        <span class="phone-prefix">+63</span>
-                        <input class="phone-input" type="tel" id="inqPhone" name="phone" placeholder="9XX XXX XXXX" maxlength="10" minlength="10" pattern="^9\d{9}$" title="Must start with 9 and be exactly 10 digits" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inqEmail">Your E-mail Address</label>
-                    <input type="email" id="inqEmail" name="email" placeholder="ex: myname@gmail.com" pattern="^[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com)$" title="Please enter a valid @gmail.com or @yahoo.com address" required>
-                    <span class="sub-label">Accepted: @gmail.com, @yahoo.com</span>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group full-width">
-                    <label for="inqMessage">Leave Your Message</label>
-                    <textarea id="inqMessage" name="message" placeholder="How can we help you today?" required></textarea>
-                </div>
-            </div>
-
-            <div class="form-actions">
-                <button type="submit" class="submit-btn">Send Inquiry</button>
-            </div>
-            
-            <div id="inquirySuccess" class="success-notice"></div>
-        </form>
-    </div>
+    </main>
 
     <footer id="app" class="site-footer">
         <div class="container footer-grid">

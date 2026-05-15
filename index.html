@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>29th Street Cafe</title>
+    <title>29th Street Cafe | Home</title>
     
     <link rel="stylesheet" href="styles.css">
-    <script src="form.js" defer></script>
-    <meta name="description" content="29th Street Cafe offers a cozy local spot to complete your day with your favorite coffee or tea, featuring a variety of coffee, milk tea, frappes, and more!">
+    <script src="menu.js" defer></script> 
+    <meta name="description" content="29th Street Cafe offers a cozy local spot to complete your day with your favorite coffee or tea.">
 </head>
 <body>
 
     <header class="site-header">
         <div class="container header-container">
-            
             <div class="logo-container">
                 <a href="index.html#hero" class="brand-logo">
                     <img src="images/logo ulit.png" alt="29th Street Cafe Logo" class="logo-img">
@@ -32,7 +31,16 @@
                     <li><a href="index.html#about" class="nav-link">About Us</a></li>
                     <li><a href="index.html#menu" class="nav-link">Menu</a></li>
                     <li class="push-right"><a href="form.html" class="nav-link btn-nav">Order Now</a></li>
-                    <li><a href="#app" class="nav-link btn-nav-outline">Contact Us</a></li>
+                    <li><a href="inquiries.html" class="nav-link btn-nav-outline">Contact Us</a></li>
+                    <li class="cart-nav-item">
+                        <a href="cart.html" class="nav-link cart-icon-link" aria-label="Go to Cart">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="9" cy="21" r="1"></circle>
+                                <circle cx="20" cy="21" r="1"></circle>
+                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                            </svg>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -75,111 +83,107 @@
             <div class="container">
                 <div class="section-header">
                     <h2>Explore the Menu</h2>
-                    <p>From classic coffee and tea favorites to a variety of milk teas, frappes, and more!</p>
+                    <p>From classic coffee and tea favorites to a variety of milk teas, frappes, and more! <br><strong>Click any item to view all flavors.</strong></p>
                     <div class="divider"></div>
                 </div>
 
                 <div class="product-grid">
-                    
                     <article class="product-card">
-                        <div class="image-wrapper">
-                            <img src="images/strawberry-berry-tea.jpeg" alt="Strawberry Black Tea" class="product-image">
-                        </div>
+                        <div class="image-wrapper"><img src="images/tea.jpeg" alt="Strawberry Black Tea" class="product-image"></div>
                         <div class="product-info">
                             <span class="product-category">Signature</span>
                             <h3 class="product-name">Strawberry Black Tea</h3>
                             <p class="product-desc">Refreshing tea-based strawberry juice</p>
-                            <div class="product-meta">
-                                <span class="product-price">₱59/69</span>
-                            </div>
+                            <div class="product-meta"><span class="product-price">₱59/69</span></div>
                         </div>
                     </article>
 
                     <article class="product-card">
-                        <div class="image-wrapper">
-                            <img src="images/latte.jpeg" alt="Latte" class="product-image">
-                        </div>
+                        <div class="image-wrapper"><img src="images/lattee.jpeg" alt="Latte" class="product-image"></div>
                         <div class="product-info">
                             <span class="product-category">Classic</span>
                             <h3 class="product-name">Latte Series</h3>
-                            <p class="product-desc">
-                                Caramel Macchiato • Hazelnut Brew • Vanilla Blanca • Salted Caramel • Pure Matcha & More
-                            </p>
-                            <div class="product-meta">
-                                <span class="product-price">₱49/59</span>
-                            </div>
+                            <p class="product-desc">Caramel Macchiato • Hazelnut Brew • Vanilla Blanca • Salted Caramel • Pure Matcha & More</p>
+                            <div class="product-meta"><span class="product-price">₱49/59</span></div>
                         </div>
                     </article>
 
                     <article class="product-card">
-                        <div class="image-wrapper">
-                            <img src="images/americano.jpg" alt="Americano" class="product-image">
-                        </div>
+                        <div class="image-wrapper"><img src="images/americano.jpeg" alt="Americano" class="product-image"></div>
                         <div class="product-info">
                             <span class="product-category">Strong</span>
                             <h3 class="product-name">Americano Series</h3>
-                            <p class="product-desc">
-                                Original • Caramel Macchiato • Hazelnut Brew • Vanilla Blanca • White Cappuccino
-                            </p>
-                            <div class="product-meta">
-                                <span class="product-price">₱49/59</span>
-                            </div>
+                            <p class="product-desc">Original • Caramel Macchiato • Hazelnut Brew • Vanilla Blanca • White Cappuccino</p>
+                            <div class="product-meta"><span class="product-price">₱49/59</span></div>
                         </div>
                     </article>
 
                     <article class="product-card">
-                        <div class="image-wrapper">
-                            <img src="images/frappe.jpeg" alt="Frappe" class="product-image">
-                        </div>
+                        <div class="image-wrapper"><img src="images/frappee.jpeg" alt="Frappe" class="product-image"></div>
                         <div class="product-info">
                             <span class="product-category">Ice Blended</span>
                             <h3 class="product-name">Frappe Series</h3>
-                            <p class="product-desc">
-                                Java Chip • Cookies & Cream • Vanilla Coffee • Mango Cheesecake • Purple Taro & More
-                            </p>
-                            <div class="product-meta">
-                                <span class="product-price">₱69/79</span>
-                            </div>
+                            <p class="product-desc">Java Chip • Cookies & Cream • Vanilla Coffee • Mango Cheesecake • Purple Taro & More</p>
+                            <div class="product-meta"><span class="product-price">₱69/79</span></div>
                         </div>
                     </article>
 
                     <article class="product-card">
-                        <div class="image-wrapper">
-                            <img src="images/milk-tea.jpg" alt="Milktea" class="product-image">
-                        </div>
+                        <div class="image-wrapper"><img src="images/milktea.jpeg" alt="Milktea" class="product-image"></div>
                         <div class="product-info">
                             <span class="product-category">Sweet</span>
                             <h3 class="product-name">Milktea Series</h3>
-                            <p class="product-desc">
-                                Wintermelon • Okinawa • Hokkaido • Brown Sugar • Green Matcha • Dark Chocolate
-                            </p>
-                            <div class="product-meta">
-                                <span class="product-price">₱49/59</span>
-                            </div>
+                            <p class="product-desc">Wintermelon • Okinawa • Hokkaido • Brown Sugar • Green Matcha • Dark Chocolate</p>
+                            <div class="product-meta"><span class="product-price">₱49/59</span></div>
                         </div>
                     </article>
 
                     <article class="product-card">
-                        <div class="image-wrapper">
-                            <img src="images/fruit-tea.jpg" alt="Fruit Soda" class="product-image">
-                        </div>
+                        <div class="image-wrapper"><img src="images/fruittea.jpeg" alt="Fruit Soda" class="product-image"></div>
                         <div class="product-info">
                             <span class="product-category">Fruity</span>
                             <h3 class="product-name">Fruit & Soda Series</h3>
-                            <p class="product-desc">
-                                Kiwi • Blueberry • Green Apple • Lychee • Passion Fruit • Strawberry • Mango
-                            </p>
-                            <div class="product-meta">
-                                <span class="product-price">₱49/59</span>
-                            </div>
+                            <p class="product-desc">Kiwi • Blueberry • Green Apple • Lychee • Passion Fruit • Strawberry • Mango</p>
+                            <div class="product-meta"><span class="product-price">₱49/59</span></div>
                         </div>
                     </article>
-
                 </div>
             </div>
         </section>
-        
     </main>
+
+    <div id="menuModal" class="menu-modal">
+        <div class="modal-content">
+            <span class="close-modal">×</span>
+            <div class="modal-layout">
+                <div class="modal-image-container">
+                    <img id="modalImage" src="" alt="Menu Item">
+                </div>
+                <div class="modal-details">
+                    <span id="modalCategory" class="product-category"></span>
+                    <h3 id="modalTitle" class="modal-title"></h3>
+                    <p id="modalPrice" class="product-price" style="margin-bottom: 20px; font-size: 1.4rem;"></p>
+                    
+                    <div class="modal-selection-group">
+                        <label for="modalFlavorSelect">Choose Flavor:</label>
+                        <select id="modalFlavorSelect" class="modal-select"></select>
+                    </div>
+
+                    <div class="modal-selection-group">
+                        <label for="modalSizeSelect">Choose Size:</label>
+                        <select id="modalSizeSelect" class="modal-select">
+                            <option value="Regular">Regular</option>
+                            <option value="Large">Large</option>
+                        </select>
+                    </div>
+                    
+                    <button id="addToCartBtn" class="btn btn-primary" style="margin-top: 20px; width: 100%;">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="cartToast" class="cart-toast">Added to cart!</div>
 
     <footer id="app" class="site-footer">
         <div class="container footer-grid">
@@ -188,21 +192,14 @@
                 <p>Your everyday coffee, made essential.</p>
                 <p>Contact Us: 0915-6088-305</p>
                 <p style="margin-top: 15px; color: var(--chai-spice); font-size: 0.95rem;">
-                    <strong>Business Hours:</strong><br>
-                    10:00 AM to 7:00 PM<br>
-                    Mondays to Fridays
+                    <strong>Business Hours:</strong><br>10:00 AM to 7:00 PM<br>Mondays to Fridays
                 </p>
             </div>
            <div class="footer-links">
                 <h4>Address</h4>
-                <ul>
-                    <li>17-A.F Paz Street, Barangay Sta. Elena, Marikina City Philippines, 1800</li>
-                </ul>
-                
+                <ul><li>17-A.F Paz Street, Barangay Sta. Elena, Marikina City Philippines, 1800</li></ul>
                 <details style="margin-top: 15px; cursor: pointer;">
-                    <summary style="color: var(--chai-spice); font-size: 0.95rem; text-decoration: underline; margin-bottom: 10px; outline: none;">
-                        View Location on Map
-                    </summary>
+                    <summary style="color: var(--chai-spice); font-size: 0.95rem; text-decoration: underline; margin-bottom: 10px; outline: none;">View Location on Map</summary>
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247050.96467806457!2d120.94661945484529!3d14.646214305176816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b9c610e8864b%3A0x1a244e8b13461ee4!2s29th%20Street%20Cafe%20by%20cof%2Ftea!5e0!3m2!1sen!2sph!4v1778140295258!5m2!1sen!2sph" width="100%" height="200" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </details>
             </div>
@@ -226,6 +223,5 @@
             <path d="M12 19V5M5 12l7-7 7 7"/>
         </svg>
     </a>
-
 </body>
 </html>
