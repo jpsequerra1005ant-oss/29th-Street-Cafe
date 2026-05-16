@@ -36,24 +36,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentBasePrice = 0;
     let currentUpsizePrice = 0;
 
-    // Real-time price updater for Size, (+₱10) Flavors, and Add-ons
     function updateModalPrice() {
         const size = sizeSelect.value;
         const flavor = flavorSelect.value;
         let displayPrice = size === "Large" ? currentUpsizePrice : currentBasePrice;
         
-        // Add flavor price bump if any
-        if (flavor && flavor.includes('(+₱10)')) {
-            displayPrice += 10;
-        }
-
-        // Add checked add-ons to total price
-        addonCheckboxes.forEach(cb => {
-            if(cb.checked) {
-                displayPrice += parseInt(cb.getAttribute('data-price'));
-            }
-        });
-
+        if (flavor && flavor.includes('(+₱10)')) displayPrice += 10;
+        addonCheckboxes.forEach(cb => { if(cb.checked) displayPrice += parseInt(cb.getAttribute('data-price')); });
         document.getElementById('modalPrice').textContent = `₱${displayPrice}.00`;
     }
 
@@ -77,20 +66,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('modalCategory').textContent = category;
                 document.getElementById('modalImage').src = imgSrc;
 
-                // Show/Hide Temperature Selector only for Latte and Americano
                 if (currentItemTitle.includes("Latte") || currentItemTitle.includes("Americano")) {
                     tempGroup.style.display = "flex";
                 } else {
                     tempGroup.style.display = "none";
                 }
 
-                // Reset Selects and Checkboxes
                 flavorSelect.innerHTML = ''; 
                 sizeSelect.value = "Regular";
                 tempSelect.value = "Iced";
                 addonCheckboxes.forEach(cb => cb.checked = false);
                 
-                // Populate flavors
                 if(menuFlavors[currentItemTitle]) {
                     menuFlavors[currentItemTitle].forEach(flavor => {
                         const option = document.createElement('option');
@@ -107,22 +93,14 @@ document.addEventListener('DOMContentLoaded', () => {
         addToCartBtn.addEventListener('click', () => {
             const selectedFlavor = flavorSelect.value;
             const selectedSize = sizeSelect.value;
-            
-            // Only save temperature if the dropdown was visible
             const selectedTemp = (tempGroup.style.display !== "none") ? tempSelect.value : null;
 
-            // Collect selected add-ons
             let addOnsList = [];
-            addonCheckboxes.forEach(cb => {
-                if(cb.checked) addOnsList.push(cb.value);
-            });
+            addonCheckboxes.forEach(cb => { if(cb.checked) addOnsList.push(cb.value); });
 
-            // Calculate exact price to push to cart
             let finalPrice = selectedSize === "Large" ? currentUpsizePrice : currentBasePrice;
             if(selectedFlavor && selectedFlavor.includes('(+₱10)')) finalPrice += 10;
-            addonCheckboxes.forEach(cb => {
-                if(cb.checked) finalPrice += parseInt(cb.getAttribute('data-price'));
-            });
+            addonCheckboxes.forEach(cb => { if(cb.checked) finalPrice += parseInt(cb.getAttribute('data-price')); });
 
             const cartItem = { 
                 title: currentItemTitle, 
@@ -136,7 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let cart = JSON.parse(localStorage.getItem('cafeCart')) || [];
             
-            // Check if exact same item (including all addons and temp) exists to stack quantities
             const existingItemIndex = cart.findIndex(item => {
                 const sameAddons = JSON.stringify(item.addOns) === JSON.stringify(cartItem.addOns);
                 return item.title === cartItem.title && 

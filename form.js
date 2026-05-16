@@ -1,16 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const scrollToTopBtn = document.getElementById('scrollToTopBtn');
-    if (scrollToTopBtn) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) scrollToTopBtn.classList.add('show');
-            else scrollToTopBtn.classList.remove('show');
-        });
-        scrollToTopBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    }
-
     const form = document.getElementById('foodOrderForm');
 
     if (form) {
@@ -122,7 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
               }
           }
 
-          // Attach Events directly to this card's elements
           seriesSelect.addEventListener('change', () => {
               if (seriesSelect.value) {
                   flavorSelect.innerHTML = `<option value="" disabled selected>Select Flavor</option>` + 
@@ -141,7 +128,6 @@ document.addEventListener('DOMContentLoaded', () => {
               if (!removeBtn.disabled) { card.remove(); bindEventsAndCalculate(); } 
           });
 
-          // Pre-populate if data comes from the Cart
           if (cartItem) {
               const seriesKey = Object.keys(menuData).find(key => menuData[key].label === cartItem.title || cartItem.title.includes(menuData[key].label.split(' - ')[0]));
               if (seriesKey) {
@@ -189,14 +175,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (seriesKey) {
               const itemData = menuData[seriesKey];
               cardPrice = sizeSelect.value === 'upsize' ? itemData.upsizePrice : itemData.basePrice;
-              
               if (flavorSelect.value && flavorSelect.value.includes('+₱10')) cardPrice += 10;
-              
               addonCheckboxes.forEach(cb => {
                   if(cb.checked) cardPrice += parseInt(cb.getAttribute('data-price'));
               });
             }
-            
             totalDue += cardPrice;
           });
           
@@ -229,15 +212,11 @@ document.addEventListener('DOMContentLoaded', () => {
              const seriesName = seriesSelect.value ? seriesSelect.options[seriesSelect.selectedIndex].text : 'Unselected Category';
              let itemDesc = `${seriesName} (${card.querySelector('.size-select').options[card.querySelector('.size-select').selectedIndex].text}) - ${flavorSelect.value || 'Unselected Flavor'}`;
              
-             if (tempWrap.style.display !== 'none') {
-                 itemDesc += ` <strong>[${tempSelect.value}]</strong>`;
-             }
+             if (tempWrap.style.display !== 'none') itemDesc += ` <strong>[${tempSelect.value}]</strong>`;
 
              let selectedAddons = [];
              card.querySelectorAll('.addon-cb:checked').forEach(cb => { selectedAddons.push(cb.value); });
-             if (selectedAddons.length > 0) {
-                 itemDesc += ` <br><span style="color:var(--mocha-brown); font-size:0.9em;">+ ${selectedAddons.join(', ')}</span>`;
-             }
+             if (selectedAddons.length > 0) itemDesc += ` <br><span style="color:var(--mocha-brown); font-size:0.9em;">+ ${selectedAddons.join(', ')}</span>`;
 
              summaryHTML += `<li style="margin-bottom: 8px;">${itemDesc}</li>`;
           });

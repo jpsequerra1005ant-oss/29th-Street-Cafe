@@ -3,7 +3,6 @@
     border: 1px solid var(--cappuccino-beige); box-shadow: 0 10px 30px rgba(75, 44, 32, 0.08);
     border-radius: 12px; font-family: var(--font-primary);
 }
-
 .inquiry-top-header {
     display: flex; justify-content: space-between; align-items: center;
     border-bottom: 2px dashed var(--cappuccino-beige); padding-bottom: 30px; margin-bottom: 35px;
