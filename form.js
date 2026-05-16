@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const menuData = {
           signature: { label: 'Signature - Strawberry Black Tea', basePrice: 59, upsizePrice: 69, flavors: ['Tea based strawberry juice'] },
-          latte: { label: 'Latte Series', basePrice: 49, upsizePrice: 59, flavors: ['Caramel Macchiato', 'Hazelnut Brew', 'Vanilla Blanca', 'Salted Caramel', 'Chocolate', 'Pure Matcha', 'Strawberry Matcha', 'Caramel Matcha'] },
+          latte: { label: 'Latte Series', basePrice: 49, upsizePrice: 59, flavors: ['Caramel Macchiato', 'Hazelnut Brew', 'Vanilla Blanca', 'White Cappuccino', 'Salted Caramel', 'Chocolate', 'Pure Matcha', 'Strawberry Matcha', 'Caramel Matcha'] },
           americano: { label: 'Americano Series', basePrice: 49, upsizePrice: 59, flavors: ['Original', 'Caramel Macchiato', 'Hazelnut Brew', 'Vanilla Blanca', 'White Cappuccino', 'Salted Caramel'] },
           frappe: { label: 'Frappe Series', basePrice: 69, upsizePrice: 79, flavors: ['Chocolate', 'Java Chip', 'Cookies & Cream', 'Cheesecake', 'Vanilla Coffee', 'Mango Cheesecake', 'Purple Taro', 'Strawberry (+₱10)', 'Green Matcha (+₱10)', 'Dark Chocolate (+₱10)'] },
           milktea: { label: 'Milktea Series', basePrice: 49, upsizePrice: 59, flavors: ['Original', 'Wintermelon', 'Okinawa', 'Hokkaido', 'Cookies & Cream', 'Chocolate', 'Purple Taro', 'Brown Sugar', 'Mango Cheesecake', 'Strawberry', 'Green Matcha', 'Dark Chocolate'] },
