@@ -54,6 +54,12 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (flavor && flavor.includes('(+₱10)')) displayPrice += 10;
         addonCheckboxes.forEach(cb => { if(cb.checked) displayPrice += parseInt(cb.getAttribute('data-price')); });
+        
+        // NEW: Check if the Soda Base is checked and add its price
+        if (modalSodaAddon && modalSodaAddon.checked) {
+            displayPrice += parseInt(modalSodaAddon.getAttribute('data-price'));
+        }
+
         document.getElementById('modalPrice').textContent = `₱${displayPrice}.00`;
     }
 
@@ -61,6 +67,11 @@ document.addEventListener('DOMContentLoaded', () => {
         sizeSelect.addEventListener('change', updateModalPrice);
         flavorSelect.addEventListener('change', updateModalPrice);
         addonCheckboxes.forEach(cb => cb.addEventListener('change', updateModalPrice));
+        
+        // NEW: Add event listener for the Soda Base checkbox
+        if (modalSodaAddon) {
+            modalSodaAddon.addEventListener('change', updateModalPrice);
+        }
 
         productCards.forEach(card => {
             card.addEventListener('click', () => {
@@ -114,10 +125,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let addOnsList = [];
             addonCheckboxes.forEach(cb => { if(cb.checked) addOnsList.push(cb.value); });
+            
+            // NEW: Push Soda Base to the add-on list so the order form sees it
+            if (modalSodaAddon && modalSodaAddon.checked) {
+                addOnsList.push(modalSodaAddon.value);
+            }
 
             let finalPrice = selectedSize === "Large" ? currentUpsizePrice : currentBasePrice;
             if(selectedFlavor && selectedFlavor.includes('(+₱10)')) finalPrice += 10;
             addonCheckboxes.forEach(cb => { if(cb.checked) finalPrice += parseInt(cb.getAttribute('data-price')); });
+            
+            // NEW: Add Soda Base price to the final cart price
+            if (modalSodaAddon && modalSodaAddon.checked) {
+                finalPrice += parseInt(modalSodaAddon.getAttribute('data-price'));
+            }
 
             const cartItem = { 
                 title: currentItemTitle, flavor: selectedFlavor, size: selectedSize, 
