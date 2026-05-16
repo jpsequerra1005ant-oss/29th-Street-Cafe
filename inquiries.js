@@ -1,4 +1,25 @@
+// --- NEW BADGE UPDATER FUNCTION ---
+function updateCartBadges() {
+    const badges = document.querySelectorAll('.cart-badge');
+    if (badges.length === 0) return;
+
+    let cart = JSON.parse(localStorage.getItem('cafeCart')) || [];
+    let totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+    badges.forEach(badge => {
+        if (totalItems > 0) {
+            badge.textContent = totalItems;
+            badge.style.display = 'flex';
+        } else {
+            badge.style.display = 'none';
+        }
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+    // Run badge check on page load
+    updateCartBadges();
+
     // HAMBURGER MENU LOGIC
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const mainNav = document.getElementById('mainNav');
