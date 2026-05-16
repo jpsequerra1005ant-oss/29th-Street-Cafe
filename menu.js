@@ -1,4 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // HAMBURGER MENU LOGIC
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mainNav = document.getElementById('mainNav');
+    if (mobileMenuBtn && mainNav) {
+        mobileMenuBtn.addEventListener('click', () => { mainNav.classList.toggle('active'); });
+        const navLinks = mainNav.querySelectorAll('.nav-link');
+        navLinks.forEach(link => { link.addEventListener('click', () => { mainNav.classList.remove('active'); }); });
+    }
+
     const scrollToTopBtn = document.getElementById('scrollToTopBtn');
     if (scrollToTopBtn) {
         window.addEventListener('scroll', () => {
@@ -31,6 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const tempGroup = document.getElementById('modalTempGroup');
     const tempSelect = document.getElementById('modalTempSelect');
     const addonCheckboxes = document.querySelectorAll('#modalAddonsGroup input[type="checkbox"]');
+    const sodaAddonContainer = document.getElementById('sodaAddonContainer');
+    const modalSodaAddon = document.getElementById('modalSodaAddon');
 
     let currentItemTitle = "";
     let currentBasePrice = 0;
@@ -72,6 +83,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     tempGroup.style.display = "none";
                 }
 
+                if (currentItemTitle.includes("Fruit & Soda")) {
+                    sodaAddonContainer.style.display = "flex";
+                } else {
+                    sodaAddonContainer.style.display = "none";
+                    if(modalSodaAddon) modalSodaAddon.checked = false;
+                }
+
                 flavorSelect.innerHTML = ''; 
                 sizeSelect.value = "Regular";
                 tempSelect.value = "Iced";
@@ -84,7 +102,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         flavorSelect.appendChild(option);
                     });
                 }
-                
                 updateModalPrice();
                 modal.classList.add('show');
             });
@@ -103,31 +120,20 @@ document.addEventListener('DOMContentLoaded', () => {
             addonCheckboxes.forEach(cb => { if(cb.checked) finalPrice += parseInt(cb.getAttribute('data-price')); });
 
             const cartItem = { 
-                title: currentItemTitle, 
-                flavor: selectedFlavor, 
-                size: selectedSize, 
-                temperature: selectedTemp,
-                addOns: addOnsList,
-                price: finalPrice, 
-                quantity: 1 
+                title: currentItemTitle, flavor: selectedFlavor, size: selectedSize, 
+                temperature: selectedTemp, addOns: addOnsList, price: finalPrice, quantity: 1 
             };
 
             let cart = JSON.parse(localStorage.getItem('cafeCart')) || [];
             
             const existingItemIndex = cart.findIndex(item => {
                 const sameAddons = JSON.stringify(item.addOns) === JSON.stringify(cartItem.addOns);
-                return item.title === cartItem.title && 
-                       item.flavor === cartItem.flavor && 
-                       item.size === cartItem.size && 
-                       item.temperature === cartItem.temperature &&
-                       sameAddons;
+                return item.title === cartItem.title && item.flavor === cartItem.flavor && 
+                       item.size === cartItem.size && item.temperature === cartItem.temperature && sameAddons;
             });
 
-            if(existingItemIndex > -1) {
-                cart[existingItemIndex].quantity += 1;
-            } else {
-                cart.push(cartItem);
-            }
+            if(existingItemIndex > -1) { cart[existingItemIndex].quantity += 1; } 
+            else { cart.push(cartItem); }
 
             localStorage.setItem('cafeCart', JSON.stringify(cart));
             modal.classList.remove('show');

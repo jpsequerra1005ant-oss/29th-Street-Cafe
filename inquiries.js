@@ -1,4 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // HAMBURGER MENU LOGIC
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mainNav = document.getElementById('mainNav');
+    if (mobileMenuBtn && mainNav) {
+        mobileMenuBtn.addEventListener('click', () => { mainNav.classList.toggle('active'); });
+        const navLinks = mainNav.querySelectorAll('.nav-link');
+        navLinks.forEach(link => { link.addEventListener('click', () => { mainNav.classList.remove('active'); }); });
+    }
+
     const inquiryForm = document.getElementById('inquiryForm');
     const successNotice = document.getElementById('inquirySuccess');
     const fNameInput = document.getElementById('inqFirstName');

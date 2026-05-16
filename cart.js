@@ -1,13 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // HAMBURGER MENU LOGIC
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mainNav = document.getElementById('mainNav');
+    if (mobileMenuBtn && mainNav) {
+        mobileMenuBtn.addEventListener('click', () => { mainNav.classList.toggle('active'); });
+        const navLinks = mainNav.querySelectorAll('.nav-link');
+        navLinks.forEach(link => { link.addEventListener('click', () => { mainNav.classList.remove('active'); }); });
+    }
+
     const cartItemsContainer = document.getElementById('cartItemsContainer');
     const cartSubtotalEl = document.getElementById('cartSubtotal');
     const cartTotalEl = document.getElementById('cartTotal');
 
     let cart = JSON.parse(localStorage.getItem('cafeCart')) || [];
 
-    function formatCurrency(amount) {
-        return `₱${amount.toFixed(2)}`;
-    }
+    function formatCurrency(amount) { return `₱${amount.toFixed(2)}`; }
 
     function saveCart() {
         localStorage.setItem('cafeCart', JSON.stringify(cart));
@@ -35,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             let addonsHTML = "";
             if (item.addOns && item.addOns.length > 0) {
-                addonsHTML = `<p style="font-size: 0.8rem; color: var(--chai-spice); margin-top:-5px;">+ ${item.addOns.join(', ')}</p>`;
+                addonsHTML = `<p style="font-size: 0.75rem; color: var(--chai-spice); margin-top:-2px;">+ ${item.addOns.join(', ')}</p>`;
             }
 
             const cartItemHTML = `
