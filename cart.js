@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('cafeCart', JSON.stringify(cart));
         renderCart();
         
-        // --- NEW: Trigger badge update here ---
+        // Trigger badge update here
         updateCartBadges();
     }
 
@@ -61,8 +61,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const itemTotal = item.price * item.quantity;
             total += itemTotal;
             
-            let descLine = `${item.flavor} (${item.size})`;
-            if (item.temperature) descLine += ` | ${item.temperature}`;
+            // Format the size and temp to go under the flavor
+            let sizeTempLine = `${item.size}`;
+            if (item.temperature) sizeTempLine += ` | ${item.temperature}`;
             
             let addonsHTML = "";
             if (item.addOns && item.addOns.length > 0) {
@@ -72,8 +73,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const cartItemHTML = `
                 <div class="cart-item-card">
                     <div class="cart-item-details">
-                        <h4>${item.title}</h4>
-                        <p>${descLine}</p>
+                        <span style="font-size: 0.7rem; color: var(--mocha-brown); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 2px;">${item.title}</span>
+                        <h4>${item.flavor}</h4>
+                        <p>${sizeTempLine}</p>
                         ${addonsHTML}
                         <span class="cart-item-price">${formatCurrency(item.price)}</span>
                     </div>

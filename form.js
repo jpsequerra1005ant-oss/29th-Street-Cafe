@@ -191,7 +191,10 @@ document.addEventListener('DOMContentLoaded', () => {
           addonCheckboxes.forEach(cb => cb.addEventListener('change', bindEventsAndCalculate));
           
           removeBtn.addEventListener('click', () => { 
-              if (!removeBtn.disabled) { card.remove(); bindEventsAndCalculate(); } 
+              if (!removeBtn.disabled) { 
+                  card.remove(); 
+                  bindEventsAndCalculate(); 
+              } 
           });
 
           if (cartItem) {
@@ -214,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
           
           toggleDynamicFields();
-          bindEventsAndCalculate();
+          // We don't call bindEventsAndCalculate() here yet to avoid saving multiple times on load
         }
 
         function renumberItems() {
@@ -228,12 +231,15 @@ document.addEventListener('DOMContentLoaded', () => {
         function bindEventsAndCalculate() {
           renumberItems(); 
           let totalDue = 0;
+          let syncedCart = []; 
           
           mealsContainer.querySelectorAll('.order-card').forEach(card => {
             const seriesSelect = card.querySelector('.series-select');
             const flavorSelect = card.querySelector('.flavor-select');
             const sizeSelect = card.querySelector('.size-select');
             const addonCheckboxes = card.querySelectorAll('.addon-cb');
+            const tempWrap = card.querySelector('.temp-wrap');
+            const tempSelect = card.querySelector('.temp-select');
 
             let cardPrice = 0; 
             const seriesKey = seriesSelect.value;
@@ -243,17 +249,58 @@ document.addEventListener('DOMContentLoaded', () => {
               cardPrice = sizeSelect.value === 'upsize' ? itemData.upsizePrice : itemData.basePrice;
               if (flavorSelect.value && flavorSelect.value.includes('+₱10')) cardPrice += 10;
               
+              let addOnsList = [];
               addonCheckboxes.forEach(cb => {
-                  if(cb.checked) cardPrice += parseInt(cb.getAttribute('data-price'));
+                  if(cb.checked) {
+                      cardPrice += parseInt(cb.getAttribute('data-price'));
+                      addOnsList.push(cb.value);
+                  }
               });
+
+              // Construct identical cart object to keep local storage synced
+              if (flavorSelect.value) {
+                  let titleName = itemData.label;
+                  if (seriesKey === 'signature') titleName = 'Strawberry Black Tea';
+
+                  const newCartItem = {
+                      title: titleName,
+                      flavor: flavorSelect.value,
+                      size: sizeSelect.value === 'upsize' ? 'Large' : 'Regular',
+                      temperature: tempWrap.style.display !== 'none' ? tempSelect.value : null,
+                      addOns: addOnsList,
+                      price: cardPrice,
+                      quantity: 1
+                  };
+
+                  const existingIndex = syncedCart.findIndex(item => {
+                      return item.title === newCartItem.title && 
+                             item.flavor === newCartItem.flavor && 
+                             item.size === newCartItem.size && 
+                             item.temperature === newCartItem.temperature && 
+                             JSON.stringify(item.addOns) === JSON.stringify(newCartItem.addOns);
+                  });
+
+                  if (existingIndex > -1) {
+                      syncedCart[existingIndex].quantity += 1;
+                  } else {
+                      syncedCart.push(newCartItem);
+                  }
+              }
             }
             totalDue += cardPrice;
           });
           
           amountDueEl.textContent = formatCurrency(totalDue);
+          
+          // Save the current state of the form back to the cart
+          localStorage.setItem('cafeCart', JSON.stringify(syncedCart));
+          updateCartBadges();
         }
 
-        addMealBtn.addEventListener('click', () => createMealCard());
+        addMealBtn.addEventListener('click', () => {
+            createMealCard();
+            bindEventsAndCalculate();
+        });
 
         form.addEventListener('submit', (e) => {
           e.preventDefault();
@@ -306,11 +353,12 @@ document.addEventListener('DOMContentLoaded', () => {
           summaryBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
           
           localStorage.removeItem('cafeCart');
-          updateCartBadges(); // NEW: Clear the badge once order is placed
+          updateCartBadges(); // Clear the badge once order is placed
         });
 
         toggleAddressVisibility(); 
         
+        // Initial setup from cart data
         let cart = JSON.parse(localStorage.getItem('cafeCart')) || [];
         if (cart.length > 0) {
             cart.forEach(item => {
@@ -321,5 +369,8 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             createMealCard(); 
         }
+        
+        // Run the calculation and mapping once all initial items are loaded
+        bindEventsAndCalculate();
     }
 });
