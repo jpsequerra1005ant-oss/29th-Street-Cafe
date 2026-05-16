@@ -1,4 +1,25 @@
+// --- NEW BADGE UPDATER FUNCTION ---
+function updateCartBadges() {
+    const badges = document.querySelectorAll('.cart-badge');
+    if (badges.length === 0) return;
+
+    let cart = JSON.parse(localStorage.getItem('cafeCart')) || [];
+    let totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+    badges.forEach(badge => {
+        if (totalItems > 0) {
+            badge.textContent = totalItems;
+            badge.style.display = 'flex';
+        } else {
+            badge.style.display = 'none';
+        }
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+    // Run badge check on page load
+    updateCartBadges();
+
     // HAMBURGER MENU LOGIC
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const mainNav = document.getElementById('mainNav');
@@ -62,7 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         orderTypeRadios.forEach(radio => radio.addEventListener('change', toggleAddressVisibility));
 
-        // Toggle GCash Image visibility
         paymentTypeRadios.forEach(radio => {
             radio.addEventListener('change', (e) => {
                 if (e.target.value === 'GCash') {
@@ -286,6 +306,7 @@ document.addEventListener('DOMContentLoaded', () => {
           summaryBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
           
           localStorage.removeItem('cafeCart');
+          updateCartBadges(); // NEW: Clear the badge once order is placed
         });
 
         toggleAddressVisibility(); 

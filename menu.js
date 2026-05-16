@@ -1,4 +1,25 @@
+// --- NEW BADGE UPDATER FUNCTION ---
+function updateCartBadges() {
+    const badges = document.querySelectorAll('.cart-badge');
+    if (badges.length === 0) return;
+
+    let cart = JSON.parse(localStorage.getItem('cafeCart')) || [];
+    let totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+    badges.forEach(badge => {
+        if (totalItems > 0) {
+            badge.textContent = totalItems;
+            badge.style.display = 'flex';
+        } else {
+            badge.style.display = 'none';
+        }
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+    // Run badge check on page load
+    updateCartBadges();
+
     // HAMBURGER MENU LOGIC
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const mainNav = document.getElementById('mainNav');
@@ -55,7 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (flavor && flavor.includes('(+₱10)')) displayPrice += 10;
         addonCheckboxes.forEach(cb => { if(cb.checked) displayPrice += parseInt(cb.getAttribute('data-price')); });
         
-        // NEW: Check if the Soda Base is checked and add its price
         if (modalSodaAddon && modalSodaAddon.checked) {
             displayPrice += parseInt(modalSodaAddon.getAttribute('data-price'));
         }
@@ -68,7 +88,6 @@ document.addEventListener('DOMContentLoaded', () => {
         flavorSelect.addEventListener('change', updateModalPrice);
         addonCheckboxes.forEach(cb => cb.addEventListener('change', updateModalPrice));
         
-        // NEW: Add event listener for the Soda Base checkbox
         if (modalSodaAddon) {
             modalSodaAddon.addEventListener('change', updateModalPrice);
         }
@@ -126,7 +145,6 @@ document.addEventListener('DOMContentLoaded', () => {
             let addOnsList = [];
             addonCheckboxes.forEach(cb => { if(cb.checked) addOnsList.push(cb.value); });
             
-            // NEW: Push Soda Base to the add-on list so the order form sees it
             if (modalSodaAddon && modalSodaAddon.checked) {
                 addOnsList.push(modalSodaAddon.value);
             }
@@ -135,7 +153,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if(selectedFlavor && selectedFlavor.includes('(+₱10)')) finalPrice += 10;
             addonCheckboxes.forEach(cb => { if(cb.checked) finalPrice += parseInt(cb.getAttribute('data-price')); });
             
-            // NEW: Add Soda Base price to the final cart price
             if (modalSodaAddon && modalSodaAddon.checked) {
                 finalPrice += parseInt(modalSodaAddon.getAttribute('data-price'));
             }
@@ -157,6 +174,10 @@ document.addEventListener('DOMContentLoaded', () => {
             else { cart.push(cartItem); }
 
             localStorage.setItem('cafeCart', JSON.stringify(cart));
+            
+            // --- NEW: Trigger badge update here ---
+            updateCartBadges();
+
             modal.classList.remove('show');
             showToast(`Added ${cartItem.title} to your cart!`);
         });
