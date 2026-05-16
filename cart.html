@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>29th Street Cafe | My Cart</title>
-    
     <link rel="stylesheet" href="styles.css">
     <script src="cart.js" defer></script>
 </head>
@@ -13,29 +12,26 @@
     <header class="site-header">
         <div class="container header-container">
             <div class="logo-container">
-                <a href="index.html#hero" class="brand-logo">
-                    <img src="images/logo ulit.png" alt="29th Street Cafe Logo" class="logo-img">
+                <a href="index.html#hero" class="brand-logo"><img src="images/logo ulit.png" alt="29th Street Cafe Logo" class="logo-img"></a>
+            </div>
+            <div class="mobile-header-actions">
+                <a href="cart.html" class="cart-icon-link" aria-label="Go to Cart">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
                 </a>
             </div>
-
-            <input type="checkbox" id="mobile-nav-toggle" class="nav-checkbox" aria-hidden="true">
-            <label for="mobile-nav-toggle" class="nav-toggle-label" aria-label="Toggle navigation menu">
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-            </label>
-
             <nav class="main-navigation">
                 <ul class="nav-list">
                     <li><a href="index.html#about" class="nav-link">About Us</a></li>
                     <li><a href="index.html#menu" class="nav-link">Menu</a></li>
                     <li class="push-right"><a href="form.html" class="nav-link btn-nav">Order Now</a></li>
-                    <li><a href="#app" class="nav-link btn-nav-outline">Contact Us</a></li>
-                    <li class="cart-nav-item">
+                    <li><a href="inquiries.html" class="nav-link btn-nav-outline">Contact Us</a></li>
+                    <li class="desktop-cart">
                         <a href="cart.html" class="nav-link cart-icon-link" aria-label="Go to Cart">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="9" cy="21" r="1"></circle>
-                                <circle cx="20" cy="21" r="1"></circle>
+                                <circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle>
                                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                             </svg>
                         </a>
@@ -105,11 +101,5 @@
         </div>
         <div class="footer-bottom"><p>© 2026 29thStreetCafe. All Right Reserved.</p></div>
     </footer>
-    
-    <a href="#" id="scrollToTopBtn" class="scroll-to-top" aria-label="Scroll to top">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 19V5M5 12l7-7 7 7"/>
-        </svg>
-    </a>
 </body>
 </html>
