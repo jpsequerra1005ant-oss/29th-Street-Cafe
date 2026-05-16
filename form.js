@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (form) {
         const orderTypeRadios = document.querySelectorAll('input[name="orderType"]');
+        const paymentTypeRadios = document.querySelectorAll('input[name="paymentType"]');
+        const gcashQRContainer = document.getElementById('gcashQRContainer');
         const addressSection = document.getElementById('addressSection');
         const streetInput = document.getElementById('streetInput');
         const citySelect = document.getElementById('citySelect');
@@ -60,6 +62,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         orderTypeRadios.forEach(radio => radio.addEventListener('change', toggleAddressVisibility));
 
+        // Toggle GCash Image visibility
+        paymentTypeRadios.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                if (e.target.value === 'GCash') {
+                    gcashQRContainer.style.display = 'block';
+                } else {
+                    gcashQRContainer.style.display = 'none';
+                }
+            });
+        });
+
         citySelect.addEventListener('change', (e) => {
           const city = e.target.value; const data = locations[city];
           if (data) {
@@ -83,6 +96,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="field"><label>Flavor / Variant</label><select class="input select flavor-select" required>${flavorOptions}</select></div>
                 <div class="field"><label>Size</label><select class="input select size-select"><option value="base">Regular</option><option value="upsize">Large</option></select></div>
                 <div class="field temp-wrap" style="display: none;"><label>Preparation</label><select class="input select temp-select"><option value="Iced">Iced</option><option value="Hot">Hot</option></select></div>
+                
+                <div class="field soda-wrap" style="display: none;">
+                    <label>Choose Base</label>
+                    <div style="padding: 6px 8px; border: 1px solid var(--cappuccino-beige); border-radius: 6px; background-color: var(--white); display: flex; align-items: center; min-height: 38px;">
+                        <label class="radio-item checkbox-item" style="width: 100%; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                            <span style="display: flex; align-items: center; gap: 5px;">
+                                <input type="checkbox" class="addon-cb soda-cb" value="Soda Base" data-price="10"> 
+                                <span style="color: var(--espresso-brown);">Fruit Soda Base</span>
+                            </span>
+                            <b style="color:var(--chai-spice);">+₱10</b>
+                        </label>
+                    </div>
+                </div>
+
               </div>
               
               <div class="addon-wrap" style="margin-top: 15px;">
@@ -96,7 +123,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     <label class="radio-item checkbox-item"><input type="checkbox" class="addon-cb" value="Matcha" data-price="15"> Matcha (+₱15)</label>
                     <label class="radio-item checkbox-item"><input type="checkbox" class="addon-cb" value="Cream Cheese" data-price="10"> Cream Cheese (+₱10)</label>
                     <label class="radio-item checkbox-item"><input type="checkbox" class="addon-cb" value="Yakult" data-price="15"> Yakult (+₱15)</label>
-                    <label class="radio-item checkbox-item soda-highlight-form"><input type="checkbox" class="addon-cb soda-cb" value="Soda Base" data-price="10"> Soda Base (+₱10)</label>
                 </div>
               </div>
             </div>`;
@@ -112,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const addonCheckboxes = card.querySelectorAll('.addon-cb');
           const removeBtn = card.querySelector('.remove-btn');
           
-          const sodaWrap = card.querySelector('.soda-highlight-form');
+          const sodaWrap = card.querySelector('.soda-wrap');
           const sodaCb = card.querySelector('.soda-cb');
 
           function toggleDynamicFields() {
@@ -196,6 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
               const itemData = menuData[seriesKey];
               cardPrice = sizeSelect.value === 'upsize' ? itemData.upsizePrice : itemData.basePrice;
               if (flavorSelect.value && flavorSelect.value.includes('+₱10')) cardPrice += 10;
+              
               addonCheckboxes.forEach(cb => {
                   if(cb.checked) cardPrice += parseInt(cb.getAttribute('data-price'));
               });
@@ -229,13 +256,23 @@ document.addEventListener('DOMContentLoaded', () => {
              const tempWrap = card.querySelector('.temp-wrap');
              const tempSelect = card.querySelector('.temp-select');
              
+             const sodaWrap = card.querySelector('.soda-wrap');
+             const sodaCb = card.querySelector('.soda-cb');
+             
              const seriesName = seriesSelect.value ? seriesSelect.options[seriesSelect.selectedIndex].text : 'Unselected Category';
              let itemDesc = `${seriesName} (${card.querySelector('.size-select').options[card.querySelector('.size-select').selectedIndex].text}) - ${flavorSelect.value || 'Unselected Flavor'}`;
              
              if (tempWrap.style.display !== 'none') itemDesc += ` <strong>[${tempSelect.value}]</strong>`;
+             
+             if (sodaWrap.style.display !== 'none' && sodaCb.checked) itemDesc += ` <strong>[Fruit Soda Base]</strong>`;
 
              let selectedAddons = [];
-             card.querySelectorAll('.addon-cb:checked').forEach(cb => { selectedAddons.push(cb.value); });
+             card.querySelectorAll('.addon-cb:checked').forEach(cb => { 
+                 if(!cb.classList.contains('soda-cb')) {
+                    selectedAddons.push(cb.value); 
+                 }
+             });
+             
              if (selectedAddons.length > 0) itemDesc += ` <br><span style="color:var(--mocha-brown); font-size:0.9em;">+ ${selectedAddons.join(', ')}</span>`;
 
              summaryHTML += `<li style="margin-bottom: 8px;">${itemDesc}</li>`;
