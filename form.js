@@ -1,4 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // HAMBURGER MENU LOGIC
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mainNav = document.getElementById('mainNav');
+    if (mobileMenuBtn && mainNav) {
+        mobileMenuBtn.addEventListener('click', () => { mainNav.classList.toggle('active'); });
+        const navLinks = mainNav.querySelectorAll('.nav-link');
+        navLinks.forEach(link => { link.addEventListener('click', () => { mainNav.classList.remove('active'); }); });
+    }
+
     const form = document.getElementById('foodOrderForm');
 
     if (form) {
@@ -78,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
               
               <div class="addon-wrap" style="margin-top: 15px;">
                 <label style="font-weight:bold; font-size: 0.95rem; margin-bottom: 8px; display:block; color:var(--espresso-brown);">Add-ons:</label>
-                <div class="addons-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px;">
+                <div class="addons-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px;">
                     <label class="radio-item checkbox-item"><input type="checkbox" class="addon-cb" value="Espresso Shot" data-price="5"> Espresso (+₱5)</label>
                     <label class="radio-item checkbox-item"><input type="checkbox" class="addon-cb" value="Nata" data-price="10"> Nata (+₱10)</label>
                     <label class="radio-item checkbox-item"><input type="checkbox" class="addon-cb" value="Pearls" data-price="10"> Pearls (+₱10)</label>
@@ -87,6 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <label class="radio-item checkbox-item"><input type="checkbox" class="addon-cb" value="Matcha" data-price="15"> Matcha (+₱15)</label>
                     <label class="radio-item checkbox-item"><input type="checkbox" class="addon-cb" value="Cream Cheese" data-price="10"> Cream Cheese (+₱10)</label>
                     <label class="radio-item checkbox-item"><input type="checkbox" class="addon-cb" value="Yakult" data-price="15"> Yakult (+₱15)</label>
+                    <label class="radio-item checkbox-item soda-highlight-form"><input type="checkbox" class="addon-cb soda-cb" value="Soda Base" data-price="10"> Soda Base (+₱10)</label>
                 </div>
               </div>
             </div>`;
@@ -101,12 +111,22 @@ document.addEventListener('DOMContentLoaded', () => {
           const tempWrap = card.querySelector('.temp-wrap');
           const addonCheckboxes = card.querySelectorAll('.addon-cb');
           const removeBtn = card.querySelector('.remove-btn');
+          
+          const sodaWrap = card.querySelector('.soda-highlight-form');
+          const sodaCb = card.querySelector('.soda-cb');
 
           function toggleDynamicFields() {
               if(seriesSelect.value === 'latte' || seriesSelect.value === 'americano') {
-                  tempWrap.style.display = 'block';
+                  tempWrap.style.display = 'flex'; 
               } else {
                   tempWrap.style.display = 'none';
+              }
+              
+              if(seriesSelect.value === 'fruitSoda') {
+                  sodaWrap.style.display = 'flex';
+              } else {
+                  sodaWrap.style.display = 'none';
+                  sodaCb.checked = false;
               }
           }
 
