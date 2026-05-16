@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Scroll to Top Logic
     const scrollToTopBtn = document.getElementById('scrollToTopBtn');
     if (scrollToTopBtn) {
         window.addEventListener('scroll', () => {
@@ -42,12 +41,22 @@ document.addEventListener('DOMContentLoaded', () => {
         cart.forEach((item, index) => {
             const itemTotal = item.price * item.quantity;
             total += itemTotal;
+            
+            // Build descriptions for temp and addons
+            let descLine = `${item.flavor} (${item.size})`;
+            if (item.temperature) descLine += ` | ${item.temperature}`;
+            
+            let addonsHTML = "";
+            if (item.addOns && item.addOns.length > 0) {
+                addonsHTML = `<p style="font-size: 0.8rem; color: var(--chai-spice); margin-top:-5px;">+ ${item.addOns.join(', ')}</p>`;
+            }
 
             const cartItemHTML = `
                 <div class="cart-item-card">
                     <div class="cart-item-details">
                         <h4>${item.title}</h4>
-                        <p>${item.flavor} (${item.size})</p>
+                        <p>${descLine}</p>
+                        ${addonsHTML}
                         <span class="cart-item-price">${formatCurrency(item.price)}</span>
                     </div>
                     <div class="cart-item-qty">

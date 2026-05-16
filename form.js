@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Scroll to Top Logic
     const scrollToTopBtn = document.getElementById('scrollToTopBtn');
     if (scrollToTopBtn) {
         window.addEventListener('scroll', () => {
@@ -73,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
 
-        function createMealCard() {
+        function createMealCard(cartItem = null) {
           const seriesOptions = `<option value="" disabled selected>Select Category</option>` + Object.entries(menuData).map(([key, item]) => `<option value="${key}">${item.label}</option>`).join('');
           const flavorOptions = `<option value="" disabled selected>Select Flavor</option>`;
 
@@ -82,14 +81,87 @@ document.addEventListener('DOMContentLoaded', () => {
               <div class="order-head">
                 <span class="item-title">Item</span><button type="button" class="remove-btn">Remove</button>
               </div>
-              <div class="meal-grid">
+              <div class="meal-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px;">
                 <div class="field"><label>Menu Category</label><select class="input select series-select" required>${seriesOptions}</select></div>
                 <div class="field"><label>Flavor / Variant</label><select class="input select flavor-select" required>${flavorOptions}</select></div>
                 <div class="field"><label>Size</label><select class="input select size-select"><option value="base">Regular</option><option value="upsize">Large</option></select></div>
-                <div class="addon-wrap" style="display: none;"><label class="radio-item"><input type="checkbox" class="soda-addon" /> Make it a Soda (+₱10)</label></div>
+                <div class="field temp-wrap" style="display: none;"><label>Preparation</label><select class="input select temp-select"><option value="Iced">Iced</option><option value="Hot">Hot</option></select></div>
+              </div>
+              
+              <div class="addon-wrap" style="margin-top: 15px;">
+                <label style="font-weight:bold; font-size: 0.95rem; margin-bottom: 8px; display:block; color:var(--espresso-brown);">Add-ons:</label>
+                <div class="addons-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px;">
+                    <label class="radio-item checkbox-item"><input type="checkbox" class="addon-cb" value="Espresso Shot" data-price="5"> Espresso (+₱5)</label>
+                    <label class="radio-item checkbox-item"><input type="checkbox" class="addon-cb" value="Nata" data-price="10"> Nata (+₱10)</label>
+                    <label class="radio-item checkbox-item"><input type="checkbox" class="addon-cb" value="Pearls" data-price="10"> Pearls (+₱10)</label>
+                    <label class="radio-item checkbox-item"><input type="checkbox" class="addon-cb" value="Caramel Syrup" data-price="10"> Caramel (+₱10)</label>
+                    <label class="radio-item checkbox-item"><input type="checkbox" class="addon-cb" value="Strawberry Syrup" data-price="10"> Strawberry (+₱10)</label>
+                    <label class="radio-item checkbox-item"><input type="checkbox" class="addon-cb" value="Matcha" data-price="15"> Matcha (+₱15)</label>
+                    <label class="radio-item checkbox-item"><input type="checkbox" class="addon-cb" value="Cream Cheese" data-price="10"> Cream Cheese (+₱10)</label>
+                    <label class="radio-item checkbox-item"><input type="checkbox" class="addon-cb" value="Yakult" data-price="15"> Yakult (+₱15)</label>
+                </div>
               </div>
             </div>`;
+            
           mealsContainer.insertAdjacentHTML('beforeend', cardHTML);
+          const card = mealsContainer.lastElementChild;
+          
+          const seriesSelect = card.querySelector('.series-select');
+          const flavorSelect = card.querySelector('.flavor-select');
+          const sizeSelect = card.querySelector('.size-select');
+          const tempSelect = card.querySelector('.temp-select');
+          const tempWrap = card.querySelector('.temp-wrap');
+          const addonCheckboxes = card.querySelectorAll('.addon-cb');
+          const removeBtn = card.querySelector('.remove-btn');
+
+          function toggleDynamicFields() {
+              if(seriesSelect.value === 'latte' || seriesSelect.value === 'americano') {
+                  tempWrap.style.display = 'block';
+              } else {
+                  tempWrap.style.display = 'none';
+              }
+          }
+
+          // Attach Events directly to this card's elements
+          seriesSelect.addEventListener('change', () => {
+              if (seriesSelect.value) {
+                  flavorSelect.innerHTML = `<option value="" disabled selected>Select Flavor</option>` + 
+                  menuData[seriesSelect.value].flavors.map(flavor => `<option value="${flavor}">${flavor}</option>`).join('');
+              }
+              toggleDynamicFields();
+              bindEventsAndCalculate(); 
+          });
+          
+          flavorSelect.addEventListener('change', bindEventsAndCalculate);
+          sizeSelect.addEventListener('change', bindEventsAndCalculate);
+          tempSelect.addEventListener('change', bindEventsAndCalculate);
+          addonCheckboxes.forEach(cb => cb.addEventListener('change', bindEventsAndCalculate));
+          
+          removeBtn.addEventListener('click', () => { 
+              if (!removeBtn.disabled) { card.remove(); bindEventsAndCalculate(); } 
+          });
+
+          // Pre-populate if data comes from the Cart
+          if (cartItem) {
+              const seriesKey = Object.keys(menuData).find(key => menuData[key].label === cartItem.title || cartItem.title.includes(menuData[key].label.split(' - ')[0]));
+              if (seriesKey) {
+                  seriesSelect.value = seriesKey;
+                  flavorSelect.innerHTML = `<option value="" disabled selected>Select Flavor</option>` + 
+                  menuData[seriesKey].flavors.map(flavor => `<option value="${flavor}">${flavor}</option>`).join('');
+                  
+                  flavorSelect.value = cartItem.flavor;
+                  sizeSelect.value = cartItem.size === 'Large' ? 'upsize' : 'base';
+                  
+                  if (cartItem.temperature) tempSelect.value = cartItem.temperature;
+                  if (cartItem.addOns && cartItem.addOns.length > 0) {
+                      addonCheckboxes.forEach(cb => {
+                          if (cartItem.addOns.includes(cb.value)) cb.checked = true;
+                      });
+                  }
+              }
+          }
+          
+          toggleDynamicFields();
           bindEventsAndCalculate();
         }
 
@@ -102,38 +174,36 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function bindEventsAndCalculate() {
-          renumberItems(); let totalDue = 0;
+          renumberItems(); 
+          let totalDue = 0;
+          
           mealsContainer.querySelectorAll('.order-card').forEach(card => {
             const seriesSelect = card.querySelector('.series-select');
             const flavorSelect = card.querySelector('.flavor-select');
             const sizeSelect = card.querySelector('.size-select');
-            const addonWrap = card.querySelector('.addon-wrap');
-            const sodaCheckbox = card.querySelector('.soda-addon');
-            const removeBtn = card.querySelector('.remove-btn');
+            const addonCheckboxes = card.querySelectorAll('.addon-cb');
 
-            let cardPrice = 0; const seriesKey = seriesSelect.value;
+            let cardPrice = 0; 
+            const seriesKey = seriesSelect.value;
+            
             if (seriesKey) {
-              if (seriesKey === 'fruitSoda') addonWrap.style.display = 'block';
-              else { addonWrap.style.display = 'none'; sodaCheckbox.checked = false; }
               const itemData = menuData[seriesKey];
               cardPrice = sizeSelect.value === 'upsize' ? itemData.upsizePrice : itemData.basePrice;
+              
               if (flavorSelect.value && flavorSelect.value.includes('+₱10')) cardPrice += 10;
-            } else { addonWrap.style.display = 'none'; sodaCheckbox.checked = false; }
-            if (sodaCheckbox.checked) cardPrice += 10;
+              
+              addonCheckboxes.forEach(cb => {
+                  if(cb.checked) cardPrice += parseInt(cb.getAttribute('data-price'));
+              });
+            }
             
             totalDue += cardPrice;
-
-            removeBtn.onclick = () => { if (!removeBtn.disabled) { card.remove(); bindEventsAndCalculate(); } };
-            seriesSelect.onchange = () => {
-              if (seriesSelect.value) flavorSelect.innerHTML = `<option value="" disabled selected>Select Flavor</option>` + menuData[seriesSelect.value].flavors.map(flavor => `<option value="${flavor}">${flavor}</option>`).join('');
-              bindEventsAndCalculate(); 
-            };
-            flavorSelect.onchange = bindEventsAndCalculate; sizeSelect.onchange = bindEventsAndCalculate; sodaCheckbox.onchange = bindEventsAndCalculate;
           });
+          
           amountDueEl.textContent = formatCurrency(totalDue);
         }
 
-        addMealBtn.addEventListener('click', createMealCard);
+        addMealBtn.addEventListener('click', () => createMealCard());
 
         form.addEventListener('submit', (e) => {
           e.preventDefault();
@@ -151,19 +221,48 @@ document.addEventListener('DOMContentLoaded', () => {
             </div><ul style="margin-left: 20px; font-size: 14px; margin-bottom: 16px;">`;
 
           mealsContainer.querySelectorAll('.order-card').forEach(card => {
-             const seriesSelect = card.querySelector('.series-select'); const flavorSelect = card.querySelector('.flavor-select');
+             const seriesSelect = card.querySelector('.series-select'); 
+             const flavorSelect = card.querySelector('.flavor-select');
+             const tempWrap = card.querySelector('.temp-wrap');
+             const tempSelect = card.querySelector('.temp-select');
+             
              const seriesName = seriesSelect.value ? seriesSelect.options[seriesSelect.selectedIndex].text : 'Unselected Category';
              let itemDesc = `${seriesName} (${card.querySelector('.size-select').options[card.querySelector('.size-select').selectedIndex].text}) - ${flavorSelect.value || 'Unselected Flavor'}`;
-             if (card.querySelector('.soda-addon').checked) itemDesc += ` <strong>[+ Soda]</strong>`;
-             summaryHTML += `<li style="margin-bottom: 6px;">${itemDesc}</li>`;
+             
+             if (tempWrap.style.display !== 'none') {
+                 itemDesc += ` <strong>[${tempSelect.value}]</strong>`;
+             }
+
+             let selectedAddons = [];
+             card.querySelectorAll('.addon-cb:checked').forEach(cb => { selectedAddons.push(cb.value); });
+             if (selectedAddons.length > 0) {
+                 itemDesc += ` <br><span style="color:var(--mocha-brown); font-size:0.9em;">+ ${selectedAddons.join(', ')}</span>`;
+             }
+
+             summaryHTML += `<li style="margin-bottom: 8px;">${itemDesc}</li>`;
           });
 
           summaryHTML += `</ul><div style="border-top: 1px dashed var(--cappuccino-beige); padding-top: 12px; font-size: 16px; color: var(--espresso-brown);">
               <strong>Total Amount Due: ${amountDueEl.textContent}</strong></div>`;
           
-          summaryBox.style.display = 'block'; summaryBox.innerHTML = summaryHTML; summaryBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          summaryBox.style.display = 'block'; 
+          summaryBox.innerHTML = summaryHTML; 
+          summaryBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          
+          localStorage.removeItem('cafeCart');
         });
 
-        toggleAddressVisibility(); createMealCard();
+        toggleAddressVisibility(); 
+        
+        let cart = JSON.parse(localStorage.getItem('cafeCart')) || [];
+        if (cart.length > 0) {
+            cart.forEach(item => {
+                for(let i = 0; i < item.quantity; i++) {
+                    createMealCard(item);
+                }
+            });
+        } else {
+            createMealCard(); 
+        }
     }
 });

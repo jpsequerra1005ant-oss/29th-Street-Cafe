@@ -31,7 +31,7 @@
                     <li><a href="index.html#about" class="nav-link">About Us</a></li>
                     <li><a href="index.html#menu" class="nav-link">Menu</a></li>
                     <li class="push-right"><a href="form.html" class="nav-link btn-nav">Order Now</a></li>
-                    <li><a href="inquiries.html" class="nav-link btn-nav-outline">Contact Us</a></li>
+                    <li><a href="#app" class="nav-link btn-nav-outline">Contact Us</a></li>
                     <li class="cart-nav-item">
                         <a href="cart.html" class="nav-link cart-icon-link" aria-label="Go to Cart">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -175,6 +175,28 @@
                             <option value="Regular">Regular</option>
                             <option value="Large">Large</option>
                         </select>
+                    </div>
+
+                    <div class="modal-selection-group" id="modalTempGroup" style="display: none;">
+                        <label for="modalTempSelect">Choose Preparation:</label>
+                        <select id="modalTempSelect" class="modal-select">
+                            <option value="Iced">Iced</option>
+                            <option value="Hot">Hot</option>
+                        </select>
+                    </div>
+
+                    <div class="modal-selection-group" id="modalAddonsGroup">
+                        <label style="margin-bottom: 8px;">Add-ons:</label>
+                        <div class="addons-grid">
+                            <label class="checkbox-item"><input type="checkbox" value="Espresso Shot" data-price="5"> Espresso (+₱5)</label>
+                            <label class="checkbox-item"><input type="checkbox" value="Nata" data-price="10"> Nata (+₱10)</label>
+                            <label class="checkbox-item"><input type="checkbox" value="Pearls" data-price="10"> Pearls (+₱10)</label>
+                            <label class="checkbox-item"><input type="checkbox" value="Caramel Syrup" data-price="10"> Caramel Syrup (+₱10)</label>
+                            <label class="checkbox-item"><input type="checkbox" value="Strawberry Syrup" data-price="10"> Strawberry (+₱10)</label>
+                            <label class="checkbox-item"><input type="checkbox" value="Matcha" data-price="15"> Matcha (+₱15)</label>
+                            <label class="checkbox-item"><input type="checkbox" value="Cream Cheese" data-price="10"> Cream Cheese (+₱10)</label>
+                            <label class="checkbox-item"><input type="checkbox" value="Yakult" data-price="15"> Yakult (+₱15)</label>
+                        </div>
                     </div>
                     
                     <button id="addToCartBtn" class="btn btn-primary" style="margin-top: 20px; width: 100%;">Add to Cart</button>

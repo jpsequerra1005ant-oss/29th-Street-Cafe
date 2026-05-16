@@ -43,7 +43,7 @@
     padding: 14px 45px; font-size: 1.1rem; font-weight: bold; border-radius: 50px; cursor: pointer;
     transition: var(--transition-standard); text-transform: uppercase; letter-spacing: 1px;
 }
-.submit-btn:hover { background-color: var(--chai-spice); color: var(--espresso-brown); border-color: var(--chai-spice); transform: translateY(-3px); box-shadow: 0 8px 15px rgba(216, 160, 120, 0.3); }
+.submit-btn:hover { background-color: var(--chai-spice); color: var(--white); border-color: var(--chai-spice); transform: translateY(-3px); box-shadow: 0 8px 15px rgba(216, 160, 120, 0.3); }
 
 .success-notice { display: none; text-align: center; margin-top: 25px; padding: 18px; background-color: var(--creamy-latte); color: var(--espresso-brown); border: 1px solid var(--chai-spice); border-radius: 8px; font-weight: 600; font-size: 1.05rem; }
 
