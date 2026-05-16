@@ -170,6 +170,11 @@ a { text-decoration: none; color: inherit; transition: var(--transition-standard
 .btn-secondary:hover { background-color: #ffffff; color: var(--espresso-brown); transform: translateY(-3px); }
 
 /* MOBILE FIX FOR HERO SECTION */
+@media (max-width: 768px) {
+    .hero-section {
+        background-attachment: scroll; /* This fixes the zoomed-in bug on mobile */
+    }
+}
 @media (max-width: 480px) {
     .hero-title { font-size: 2rem; }
     .hero-subtitle { font-size: 0.85rem; padding: 0 10px; line-height: 1.4; }
