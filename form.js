@@ -223,7 +223,15 @@ document.addEventListener('DOMContentLoaded', () => {
           });
 
           if (cartItem) {
-              const seriesKey = Object.keys(menuData).find(key => menuData[key].label === cartItem.title || cartItem.title.includes(menuData[key].label.split(' - ')[0]));
+              const cleanedTitle = cartItem.title.trim().replace(/\s+$/, '');
+              const seriesKey = Object.keys(menuData).find(key => {
+                  const labelStr = menuData[key].label;
+                  return labelStr === cleanedTitle || 
+                         cleanedTitle.includes(labelStr.split(' - ')[0]) || 
+                         labelStr.includes(cleanedTitle) ||
+                         (key === 'signature' && cleanedTitle.includes('Strawberry'));
+              });
+
               if (seriesKey) {
                   seriesSelect.value = seriesKey;
                   flavorSelect.innerHTML = `<option value="" disabled selected>Select Flavor</option>` + 
@@ -242,7 +250,6 @@ document.addEventListener('DOMContentLoaded', () => {
           }
           
           toggleDynamicFields();
-          // We don't call bindEventsAndCalculate() here yet to avoid saving multiple times on load
         }
 
         function renumberItems() {
@@ -265,13 +272,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const tempWrap = card.querySelector('.temp-wrap');
             const tempSelect = card.querySelector('.temp-select');
 
-            let cardPrice = 0; 
             const seriesKey = seriesSelect.value;
             
-            if (seriesKey) {
+            // Only calculate if a series and flavor are properly selected
+            if (seriesKey && flavorSelect.value) {
               const itemData = menuData[seriesKey];
-              cardPrice = sizeSelect.value === 'upsize' ? itemData.upsizePrice : itemData.basePrice;
-              if (flavorSelect.value && flavorSelect.value.includes('+₱10')) cardPrice += 10;
+              let cardPrice = sizeSelect.value === 'upsize' ? itemData.upsizePrice : itemData.basePrice;
+              if (flavorSelect.value.includes('+₱10')) cardPrice += 10;
               
               let addOnsList = [];
               addonCheckboxes.forEach(cb => {
@@ -282,36 +289,36 @@ document.addEventListener('DOMContentLoaded', () => {
               });
 
               // Construct identical cart object to keep local storage synced
-              if (flavorSelect.value) {
-                  let titleName = itemData.label;
-                  if (seriesKey === 'signature') titleName = 'Strawberry Black Tea';
+              let titleName = itemData.label;
+              if (seriesKey === 'signature') titleName = 'Strawberry Black Tea';
 
-                  const newCartItem = {
-                      title: titleName,
-                      flavor: flavorSelect.value,
-                      size: sizeSelect.value === 'upsize' ? 'Large' : 'Regular',
-                      temperature: tempWrap.style.display !== 'none' ? tempSelect.value : null,
-                      addOns: addOnsList,
-                      price: cardPrice,
-                      quantity: 1
-                  };
+              const newCartItem = {
+                  title: titleName,
+                  flavor: flavorSelect.value,
+                  size: sizeSelect.value === 'upsize' ? 'Large' : 'Regular',
+                  temperature: tempWrap.style.display !== 'none' ? tempSelect.value : null,
+                  addOns: addOnsList,
+                  price: cardPrice,
+                  quantity: 1
+              };
 
-                  const existingIndex = syncedCart.findIndex(item => {
-                      return item.title === newCartItem.title && 
-                             item.flavor === newCartItem.flavor && 
-                             item.size === newCartItem.size && 
-                             item.temperature === newCartItem.temperature && 
-                             JSON.stringify(item.addOns) === JSON.stringify(newCartItem.addOns);
-                  });
+              const existingIndex = syncedCart.findIndex(item => {
+                  return item.title === newCartItem.title && 
+                         item.flavor === newCartItem.flavor && 
+                         item.size === newCartItem.size && 
+                         item.temperature === newCartItem.temperature && 
+                         JSON.stringify(item.addOns) === JSON.stringify(newCartItem.addOns);
+              });
 
-                  if (existingIndex > -1) {
-                      syncedCart[existingIndex].quantity += 1;
-                  } else {
-                      syncedCart.push(newCartItem);
-                  }
+              if (existingIndex > -1) {
+                  syncedCart[existingIndex].quantity += 1;
+              } else {
+                  syncedCart.push(newCartItem);
               }
+              
+              // Only add to the visible total if it is a complete, valid item
+              totalDue += cardPrice;
             }
-            totalDue += cardPrice;
           });
           
           amountDueEl.textContent = formatCurrency(totalDue);
