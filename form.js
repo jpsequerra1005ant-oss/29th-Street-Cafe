@@ -319,6 +319,20 @@ document.addEventListener('DOMContentLoaded', () => {
           // Save the current state of the form back to the cart
           localStorage.setItem('cafeCart', JSON.stringify(syncedCart));
           updateCartBadges();
+
+          // --- LOGIC TO HIDE "REMOVE" IF THERE'S ONLY 1 EMPTY DRINK ---
+          const allCards = mealsContainer.querySelectorAll('.order-card');
+          allCards.forEach(c => {
+              const rBtn = c.querySelector('.remove-btn');
+              const sSel = c.querySelector('.series-select');
+              
+              // Hide if it's the ONLY card AND no category is selected yet
+              if (allCards.length === 1 && !sSel.value) {
+                  rBtn.style.display = 'none';
+              } else {
+                  rBtn.style.display = '';
+              }
+          });
         }
 
         addMealBtn.addEventListener('click', () => {
@@ -371,6 +385,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
           summaryHTML += `</ul><div style="border-top: 1px dashed var(--cappuccino-beige); padding-top: 12px; font-size: 16px; color: var(--espresso-brown);">
               <strong>Total Amount Due: ${amountDueEl.textContent}</strong></div>`;
+              
+          // --- NEW GCASH NOTE LOGIC ---
+          if (paymentType === 'GCash') {
+              summaryHTML += `<p style="font-size: 0.8rem; color: var(--mocha-brown); margin-top: 10px; font-style: italic;">* Note: Please prepare to show your GCash transaction receipt upon delivery or pick-up for confirmation.</p>`;
+          }
           
           summaryBox.style.display = 'block'; 
           summaryBox.innerHTML = summaryHTML; 
