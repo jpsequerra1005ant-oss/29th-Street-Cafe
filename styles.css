@@ -15,7 +15,7 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
 
 body {
     font-family: var(--font-primary);
@@ -462,6 +462,33 @@ a { text-decoration: none; color: inherit; transition: var(--transition-standard
 .qty-btn { background: transparent; border: none; font-size: 1.1rem; font-weight: bold; color: var(--espresso-brown); cursor: pointer; padding: 0 4px; transition: color 0.2s; }
 .qty-btn:hover { color: var(--chai-spice); }
 .qty-count { font-size: 0.85rem; font-weight: 600; width: 16px; text-align: center; }
+
+/* NEW: Clean transparent input for the cart quantity */
+.qty-input {
+    width: 35px; 
+    text-align: center; 
+    border: none; 
+    background: transparent; 
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--espresso-brown);
+    outline: none; 
+    padding: 0;
+    transition: var(--transition-standard);
+    -moz-appearance: textfield; /* Hides default spin arrows in Firefox */
+}
+
+/* Hides default spin arrows in Chrome/Safari */
+.qty-input::-webkit-outer-spin-button,
+.qty-input::-webkit-inner-spin-button {
+    -webkit-appearance: none; 
+    margin: 0;
+}
+
+.qty-input:focus {
+    border-bottom: 2px solid var(--chai-spice);
+    border-radius: 0;
+}
 
 .promo-code-box { 
     display: flex; align-items: center; justify-content: center; padding: 10px 15px; 
