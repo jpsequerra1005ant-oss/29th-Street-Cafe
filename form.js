@@ -204,10 +204,22 @@ document.addEventListener('DOMContentLoaded', () => {
           addonCheckboxes.forEach(cb => cb.addEventListener('change', bindEventsAndCalculate));
           
           removeBtn.addEventListener('click', () => { 
-              if (!removeBtn.disabled) { 
+              const currentCards = mealsContainer.querySelectorAll('.order-card');
+              if (currentCards.length === 1) {
+                  // If it's the last item, just reset the form fields
+                  seriesSelect.selectedIndex = 0;
+                  flavorSelect.innerHTML = `<option value="" disabled selected>Select Flavor</option>`;
+                  sizeSelect.value = "base";
+                  tempWrap.style.display = 'none';
+                  tempSelect.value = 'Iced';
+                  sodaWrap.style.display = 'none';
+                  sodaCb.checked = false;
+                  addonCheckboxes.forEach(cb => cb.checked = false);
+              } else {
+                  // If there are multiple items, remove this specific card
                   card.remove(); 
-                  bindEventsAndCalculate(); 
-              } 
+              }
+              bindEventsAndCalculate(); 
           });
 
           if (cartItem) {
@@ -237,7 +249,6 @@ document.addEventListener('DOMContentLoaded', () => {
           const cards = mealsContainer.querySelectorAll('.order-card');
           cards.forEach((card, index) => {
             card.querySelector('.item-title').textContent = `Drink Item ${index + 1}`;
-            card.querySelector('.remove-btn').disabled = cards.length === 1;
           });
         }
 
