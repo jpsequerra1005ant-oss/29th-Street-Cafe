@@ -99,9 +99,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const priceText = card.querySelector('.product-price').textContent;
                 const imgSrc = card.querySelector('.product-image').src;
 
-                const prices = priceText.replace('₱', '').split('/');
-                currentBasePrice = parseInt(prices[0]);
-                currentUpsizePrice = parseInt(prices[1]) || currentBasePrice;
+                // FIXED: Using regex to find the numbers inside the new "Regular: ₱49 | Large: ₱59" format
+                const parsedPrices = priceText.match(/\d+/g);
+                currentBasePrice = parseInt(parsedPrices[0]);
+                currentUpsizePrice = parsedPrices.length > 1 ? parseInt(parsedPrices[1]) : currentBasePrice;
 
                 document.getElementById('modalTitle').textContent = currentItemTitle;
                 document.getElementById('modalCategory').textContent = category;
