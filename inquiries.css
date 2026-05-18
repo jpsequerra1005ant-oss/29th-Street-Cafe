@@ -1,9 +1,17 @@
+/* STRICT BOX FORMAT ENFORCEMENT */
 .inquiry-wrapper {
+    width: 100%;
     max-width: 550px; 
-    margin: 30px auto; padding: 25px; background-color: var(--white);
-    border: 1px solid var(--cappuccino-beige); box-shadow: 0 10px 30px rgba(75, 44, 32, 0.08);
-    border-radius: 12px; font-family: var(--font-primary);
+    margin: 30px auto; 
+    padding: 25px; 
+    border: 1px solid var(--cappuccino-beige); 
+    background-color: var(--white);
+    box-shadow: 0 10px 30px rgba(75, 44, 32, 0.08);
+    border-radius: 12px; 
+    font-family: var(--font-primary);
+    box-sizing: border-box;
 }
+
 .inquiry-top-header {
     display: flex; justify-content: space-between; align-items: center;
     border-bottom: 2px dashed var(--cappuccino-beige); padding-bottom: 15px; margin-bottom: 20px;
