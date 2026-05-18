@@ -56,6 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const addToCartBtn = document.getElementById('addToCartBtn');
     const cartToast = document.getElementById('cartToast');
     
+    // UI Elements
+    const flavorGroup = document.getElementById('modalFlavorGroup'); // Added this to control visibility
     const flavorSelect = document.getElementById('modalFlavorSelect');
     const sizeSelect = document.getElementById('modalSizeSelect');
     const tempGroup = document.getElementById('modalTempGroup');
@@ -108,6 +110,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('modalCategory').textContent = category;
                 document.getElementById('modalImage').src = imgSrc;
 
+                // --- NEW: Hide Flavor Dropdown for Signature Drink ---
+                if (category.includes("Signature") || currentItemTitle.includes("Strawberry Black Tea")) {
+                    if (flavorGroup) flavorGroup.style.display = "none";
+                } else {
+                    if (flavorGroup) flavorGroup.style.display = "block"; 
+                }
+
                 if (currentItemTitle.includes("Latte") || currentItemTitle.includes("Americano")) {
                     tempGroup.style.display = "flex";
                 } else {
@@ -139,7 +148,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         addToCartBtn.addEventListener('click', () => {
-            const selectedFlavor = flavorSelect.value;
+            // Only grab the flavor if the flavor group isn't hidden
+            const isSignature = flavorGroup && flavorGroup.style.display === "none";
+            const selectedFlavor = isSignature ? "Signature/Default" : flavorSelect.value;
             const selectedSize = sizeSelect.value;
             const selectedTemp = (tempGroup.style.display !== "none") ? tempSelect.value : null;
 
